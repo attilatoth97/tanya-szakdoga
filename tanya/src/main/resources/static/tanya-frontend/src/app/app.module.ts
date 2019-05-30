@@ -25,6 +25,7 @@ import { CalendarComponent } from './components/user/calendar/calendar.component
 import { CommentViewComponent } from './components/user/comment/comment-view.component';
 import { TaskCreateComponent } from './components/user/task/task-create/task-create.component';
 import { ResponseInterceptor } from './authguard/responseInterceptor';
+import { TaskUpdateComponent } from './components/user/task/task-update/task-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { ResponseInterceptor } from './authguard/responseInterceptor';
     CalendarComponent,
     SprintDialog,
     CommentViewComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    TaskUpdateComponent
   ],
   entryComponents: [
     CreateOrUpdateGroupDialog,

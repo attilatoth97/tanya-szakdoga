@@ -84,6 +84,9 @@ export class SprintDialog {
     sprintModel: SprintEditorDTO = <SprintEditorDTO>{};
     end = new Date();
     start = new Date();
+    minDate = new Date(2000, 0, 1);
+    maxDate = new Date(2030, 0, 1);
+
     constructor(
         public dialogRef: MatDialogRef<SprintDialog>,
         private sprintService: SprintService,
