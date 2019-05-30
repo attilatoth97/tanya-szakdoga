@@ -1,6 +1,8 @@
 package hu.szakdolgozat.tanya.service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import hu.szakdolgozat.tanya.repository.TaskRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskEditorDTO;
+import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
 import hu.szakdolgozat.tanya.service.mapper.TaskMapper;
 
 @Service
@@ -83,6 +86,18 @@ public class TaskService {
 
 	protected Task findOne(Long id) {
 		return taskRepository.getOne(id);
+	}
+
+	public List<TaskMiniDTO> getAllOwnCreatedTask() {
+		Long userId = UserUtil.getAuthenticatedUser().getId();
+		return taskRepository.findByCreateUserId(userId).stream().map(taskMapper::toMiniDTO)
+				.collect(Collectors.toList());
+	}
+
+	public List<TaskMiniDTO> getAllOwnResponsibledTask() {
+		Long userId = UserUtil.getAuthenticatedUser().getId();
+		return taskRepository.findByResponsibleUserId(userId).stream().map(taskMapper::toMiniDTO)
+				.collect(Collectors.toList());
 	}
 
 }

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatCardModule, MatIconModule, MatSelectModule
+  MatToolbarModule, MatButtonModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatCardModule, MatIconModule, MatSelectModule, MatExpansionModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatExpansionModule
 
 
   ],
@@ -38,7 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatIconModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule {

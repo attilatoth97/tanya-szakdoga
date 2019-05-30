@@ -24,12 +24,47 @@
     <br>
     <mat-form-field>
             <mat-label>Felelős személy</mat-label>
-            <mat-select>
+            <mat-select [(ngModel)]="taskModel.responsibleUserId" name="mamber">
               <mat-option *ngFor="let mamber of groupMambers" [value]="mamber.id">
-                {{mamber.fullName}}
+                {{mamber.userName}}
               </mat-option>
             </mat-select>
     </mat-form-field>
+
+    <br>
+    <mat-form-field>
+            <mat-label>Sprint</mat-label>
+            <mat-select [(ngModel)]="taskModel.sprintId" name="sprint">
+              <mat-option *ngFor="let sprint of sprints" [value]="sprint.id">
+                {{sprint.sprintName}}
+              </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+        <mat-label>Feladat tipusa</mat-label>
+        <mat-select [(ngModel)]="taskModel.issueType" name="type">
+            <mat-option *ngFor="let type of issueTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+    <br>
+      <mat-form-field>
+          <mat-label>Feladat állapota</mat-label>
+          <mat-select [(value)]="taskModel.issueStatus">
+            <mat-option value="issueStatus.BACKLOG">Backlog</mat-option>
+            <mat-option value="issueStatus.PLANING">Planing</mat-option>
+            <mat-option value="issueStatus.DEVELOPMENT_DOING">Deveopment Doing</mat-option>
+            <mat-option value="issueStatus.DEVELOPMENT_DONE">Deveopment Done</mat-option>
+            <mat-option value="issueStatus.TESTING_DOING">Testing Doing</mat-option>
+            <mat-option value="issueStatus.TESTING_FAILD">Testing Faild</mat-option>
+            <mat-option value="issueStatus.TESTING_SUCCESSFUL">Testing Successful</mat-option>
+
+          </mat-select>
+        </mat-form-field>
 
     <br>
     <mat-form-field>
@@ -40,9 +75,9 @@
                 matInput 
                 placeholder="Becsült idő"
                 name="task_name"
-                [(ngModel)]="taskModel.issueName">
+                [(ngModel)]="taskModel.estimatedTime">
     </mat-form-field>
     <br>
-    <button class="btn btn-primary">Létrehozás</button>
-    <button class="btn btn-default">Vissza</button>
+    <button class="btn btn-primary" (click)="saveTask()">Létrehozás</button>
+    <button class="btn btn-default" (click)="backnavigate()">Vissza</button>
 </div>   

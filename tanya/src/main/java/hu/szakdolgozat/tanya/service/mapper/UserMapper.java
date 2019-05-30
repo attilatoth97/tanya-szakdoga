@@ -10,6 +10,7 @@ import hu.szakdolgozat.tanya.entity.User;
 import hu.szakdolgozat.tanya.entity.enumeration.UserRole;
 import hu.szakdolgozat.tanya.service.dto.UserDTO;
 import hu.szakdolgozat.tanya.service.dto.UserEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 
 @Mapper(uses = { PersonMapper.class }, componentModel = "spring")
 public abstract class UserMapper {
@@ -22,6 +23,8 @@ public abstract class UserMapper {
 	public abstract UserEditerDTO toEditerDTO(User entity);
 
 	public abstract User ById(Long id);
+
+	public abstract UserMiniDTO toMiniDTO(User entity);
 
 	public User toEntity(UserEditerDTO dto) {
 		if (dto == null) {

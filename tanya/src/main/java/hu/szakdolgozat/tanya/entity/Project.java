@@ -59,7 +59,7 @@ public class Project {
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	private Set<Sprint> sprints = new HashSet<>();
 
-	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	private Set<UserWorking> users = new HashSet<>();
 
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)

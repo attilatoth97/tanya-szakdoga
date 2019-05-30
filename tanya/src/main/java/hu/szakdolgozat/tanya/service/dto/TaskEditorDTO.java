@@ -26,4 +26,6 @@ public class TaskEditorDTO {
 
 	private Long sprintId;
 
+	private Long projectId;
+
 }

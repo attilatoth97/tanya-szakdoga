@@ -10,7 +10,7 @@
                 <div *ngFor="let group of ownGroup">
                 <li class="list-group-item">
                     <strong>{{ group.groupName }}</strong>
-                    <span class="text-right">
+                    <span class="text-right col-md-1">
                             <button class="btn btn-primary" (click)="navigate(group.id)"> <strong>Mutasd</strong> </button>
                     </span>
                     
@@ -24,8 +24,8 @@
                         <li class="list-group-item">
                             <strong>{{ group.groupName }}</strong>
                             <span> - {{group.createdUserName}}</span>
-        
-                            <span class="text-right">
+                        
+                            <span class="text-right col-md-1" >
                                     <button class="btn btn-primary" (click)="navigate(group.id)"> <strong>Mutasd</strong> </button>
                             </span>
                         </li>

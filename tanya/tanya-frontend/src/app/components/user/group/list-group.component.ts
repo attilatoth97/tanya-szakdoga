@@ -75,7 +75,7 @@ export class ListGroupComponent implements OnInit {
 export class CreateOrUpdateGroupDialog {
 
     groupModel: GroupDTO = <GroupDTO>{};
-
+    isValid = false;
     constructor(
         public dialogRef: MatDialogRef<CreateOrUpdateGroupDialog>,
         private groupService: GroupService,
@@ -87,15 +87,20 @@ export class CreateOrUpdateGroupDialog {
         }
 
         save() {
-            console.log('save-dialog');
             this.groupService.create(this.groupModel).subscribe(group => {
                 if (group) {
-                    this.toast.success('Sikeres mentés');
                     this.dialogRef.close();
-                } else {
-                    this.toast.error('Sikertelen mentés');
                 }
             });
+        }
+
+        valid() {
+            if (this.groupModel.groupName) {
+                this.isValid = true;
+            } else {
+                this.isValid = false;
+
+            }
         }
 }
 

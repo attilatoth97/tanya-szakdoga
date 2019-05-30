@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserEditerDTO } from '../model/user.editer.dto.modal';
 import { UserDTO } from '../model/user.dto.modal';
 import { Observable } from 'rxjs/internal/Observable';
+import { backendUrl } from '../app.constant';
 
 
 @Injectable()
 export class UserService {
 
     private get baseUrl(): string {
-        return 'http://localhost:8080/';
+        return backendUrl;
     }
 
     constructor(private http: HttpClient) {}

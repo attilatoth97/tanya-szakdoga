@@ -1,14 +1,18 @@
 <h1 mat-dialog-title>Csoport létrehozás</h1>
+<form #f>
 <div mat-dialog-content>
     <mat-form-field class="example-full-width">
         <input 
             matInput 
             placeholder="Csoport név"
             name = "group_name"
-            [(ngModel)]="groupModel.groupName">
+            [(ngModel)]="groupModel.groupName"
+            (ngModelChange)= "valid()"
+            required>
     </mat-form-field>
 </div>
 <mat-dialog-actions align="end">
-        <button mat-button class="btn btn-success" (click)="save()">Mentés</button>
+        <button mat-button class="btn btn-success" (click)="save()" [disabled]= "!isValid">Mentés</button>
         <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
 </mat-dialog-actions>
+</form>

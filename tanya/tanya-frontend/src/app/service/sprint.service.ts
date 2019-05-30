@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { SprintEditorDTO } from '../model/sprint.editor.dto';
 import { SprintDTO } from '../model/sprint.dto';
 import { Observable } from 'rxjs';
+import { backendUrl } from '../app.constant';
+import { SprintMapDTO } from '../model/sprint.map.dto';
 
 
 @Injectable()
@@ -10,7 +12,7 @@ export class SprintService {
 
 
     private get baseUrl(): string {
-        return '//localhost:8080/api/';
+        return backendUrl + 'api/';
     }
 
     constructor( private http: HttpClient) {}
@@ -23,6 +25,11 @@ export class SprintService {
     public getTheProjectsSprints(id: number): Observable<SprintDTO[]> {
         const params = new HttpParams();
         return this.http.get<SprintDTO[]>(this.baseUrl + 'sprint' + '/' + id );
+    }
+
+    public getTheProjectsMapSprints(id: number): Observable<SprintMapDTO[]> {
+        const params = new HttpParams();
+        return this.http.get<SprintDTO[]>(this.baseUrl + 'sprint/map/' + id );
     }
 
 }

@@ -49,7 +49,6 @@ export class SprintTaskComponent implements OnInit {
     }
 
     navigate(id: number) {
-        console.log('test');
         this.route.navigateByUrl('/sprint-task-list/' + id);
     }
 
@@ -99,7 +98,6 @@ export class SprintDialog {
         }
 
         save() {
-            console.log('save-dialog');
             this.sprintModel.projectId = this.data;
             this.sprintService.create(this.sprintModel).subscribe(sprint => {
                 if (sprint) {

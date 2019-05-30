@@ -12,10 +12,13 @@ import hu.szakdolgozat.tanya.entity.Group;
 import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.entity.Sprint;
 import hu.szakdolgozat.tanya.entity.User;
+import hu.szakdolgozat.tanya.entity.UserInGroup;
 import hu.szakdolgozat.tanya.repository.ProjectRepository;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 import hu.szakdolgozat.tanya.service.mapper.ProjectMapper;
+import hu.szakdolgozat.tanya.service.mapper.UserMapper;
 
 @Service
 public class ProjectService {
@@ -31,6 +34,9 @@ public class ProjectService {
 
 	@Autowired
 	private GroupService groupService;
+
+	@Autowired
+	private UserMapper userMapper;
 
 	public ProjectDTO save(ProjectEditerDTO editerDto) {
 		User loggedUser = userService.getLoggedUser();
@@ -104,6 +110,13 @@ public class ProjectService {
 			return false;
 		}
 		return true;
+	}
+
+	public List<UserMiniDTO> getAllMiniUserInGroup(Long id) {
+		Project project = findOne(id);
+		Group group = project.getGroup();
+		return group.getUsers().stream().map(UserInGroup::getUser).map(userMapper::toMiniDTO)
+				.collect(Collectors.toList());
 	}
 
 }

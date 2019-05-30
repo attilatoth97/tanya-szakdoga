@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { GroupDTO } from '../model/group.dto.modal';
 import { Observable } from 'rxjs';
+import { backendUrl } from '../app.constant';
 
 @Injectable()
 export class GroupService {
 
 
     private get baseUrl(): string {
-        return '//localhost:8080/api/';
+        return backendUrl + 'api/';
     }
 
   constructor( private http: HttpClient) {}

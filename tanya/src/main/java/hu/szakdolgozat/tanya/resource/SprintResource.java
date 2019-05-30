@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.szakdolgozat.tanya.service.SprintService;
 import hu.szakdolgozat.tanya.service.dto.SprintDTO;
 import hu.szakdolgozat.tanya.service.dto.SprintEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.SprintMapDTO;
 
 @RestController
 public class SprintResource {
@@ -34,6 +35,11 @@ public class SprintResource {
 	@GetMapping(api + "/sprint/{id}")
 	public ResponseEntity<List<SprintDTO>> getTheProjectsSprints(@PathVariable("id") Long id) {
 		return ResponseEntity.ok().body(sprintService.getSprintByProjectId(id));
+	}
+
+	@GetMapping(api + "/sprint/map/{id}")
+	public ResponseEntity<List<SprintMapDTO>> getTheProjectsMapSprints(@PathVariable("id") Long id) {
+		return ResponseEntity.ok().body(sprintService.getAllSprint(id));
 	}
 
 }

@@ -3,13 +3,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TaskEditerDTO } from '../model/task.editer.modal';
 import { TaskDTO } from '../model/task.dto.modal';
+import { backendUrl } from '../app.constant';
+import { TaskMiniDTO } from '../model/task.mini.dto';
 
 @Injectable()
 export class TaskService {
 
 
     private get baseUrl(): string {
-        return '//localhost:8080/api/';
+        return backendUrl + 'api/';
     }
 
   constructor( private http: HttpClient) {}
@@ -27,6 +29,15 @@ export class TaskService {
     public getCommentInTask(id: number): Observable<TaskDTO> {
         const params = new HttpParams();
         return this.http.get<TaskDTO>(this.baseUrl + 'task/' + id);
+    }
 
+    public getAllOwnCreatedTask(): Observable<TaskMiniDTO[]> {
+        const params = new HttpParams();
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/created' );
+    }
+
+    public getAllOwnResponsibledTask(): Observable<TaskMiniDTO[]> {
+        const params = new HttpParams();
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/responsibled' );
     }
 }

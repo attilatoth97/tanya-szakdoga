@@ -3,13 +3,15 @@ import { ProjectEditerDTO } from '../model/project.editer.dto.modal';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProjectDTO } from '../model/project.dto.modal';
+import { backendUrl } from '../app.constant';
+import { UserMiniDTO } from '../model/user.mini.dto';
 
 @Injectable()
 export class ProjectService {
 
 
     private get baseUrl(): string {
-        return '//localhost:8080/api/';
+        return backendUrl + 'api/';
     }
 
     constructor( private http: HttpClient) {}
@@ -34,4 +36,10 @@ export class ProjectService {
         const params = new HttpParams();
         return this.http.delete<void>(this.baseUrl + 'project' + '/' + id );
     }
+
+    public getMiniUserInGroup(id: number): Observable<UserMiniDTO[]> {
+        const params = new HttpParams();
+        return this.http.get<UserMiniDTO[]>(this.baseUrl + 'project/' + id + '/user' );
+    }
+
 }

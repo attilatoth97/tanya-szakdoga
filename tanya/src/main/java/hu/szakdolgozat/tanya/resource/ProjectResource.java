@@ -1,5 +1,6 @@
 package hu.szakdolgozat.tanya.resource;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.szakdolgozat.tanya.service.ProjectService;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -44,7 +46,11 @@ public class ProjectResource {
 	@GetMapping("/project/name/{id}")
 	public ResponseEntity<Set<String>> getProjectNamesInGroup(@PathVariable("id") Long groupId) {
 		return ResponseEntity.ok().body(projectService.getProjectNamesInGroup(groupId));
+	}
 
+	@GetMapping("/project/{id}/user")
+	public ResponseEntity<List<UserMiniDTO>> getMiniUserInGroup(@PathVariable("id") Long id) {
+		return ResponseEntity.ok().body(projectService.getAllMiniUserInGroup(id));
 	}
 
 }
