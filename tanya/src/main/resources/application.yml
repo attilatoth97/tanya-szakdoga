@@ -1,0 +1,13 @@
+logging:  level:    org.springframework.web: DEBUG
+spring:
+  datasource:
+    password: 'postgres'
+    url: 'jdbc:postgresql://localhost:5432/szakdoga '
+    username: szakdoga
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:/database/changelog/db.changelog-master.xml
+    enabled: true

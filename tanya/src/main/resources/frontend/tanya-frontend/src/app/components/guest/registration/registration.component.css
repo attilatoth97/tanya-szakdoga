@@ -1,0 +1,8 @@
+.formatter-input {
+    position: relative;
+    top: 20%;
+    left: 50%
+}
+.valid-error{
+    color: red
+}

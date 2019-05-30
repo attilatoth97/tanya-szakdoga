@@ -1,0 +1,11 @@
+SELECT setval('project_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM project), false);
+SELECT setval('person_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM person), false);
+SELECT setval('sprint_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM sprint), false);
+SELECT setval('user_working_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM user_working), false);
+SELECT setval('task_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM task), false);
+SELECT setval('comment_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM comment), false);
+SELECT setval('calendar_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM calendar), false);
+SELECT setval('development_log_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM development_log), false);
+SELECT setval('user_table_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM user_table), false);
+SELECT setval('user_in_group_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM user_in_group), false);
+SELECT setval('group_table_id_seq', (SELECT COALESCE(MAX(id)+1,1) FROM group_table), false);

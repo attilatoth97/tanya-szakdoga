@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Projekt létrehozás</h1>
+<div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+        <input 
+            matInput 
+            placeholder="Projekt név"
+            name = "project_name"
+            [(ngModel)]="projectModel.projectName">
+    </mat-form-field>
+
+    <br>
+    <mat-form-field class="example-full-width">
+            <textarea 
+                matInput 
+                placeholder="Projekt leírás"
+                name = "project_description"
+                [(ngModel)]="projectModel.description">
+            </textarea>
+        </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+        <button mat-button class="btn btn-success" (click)="save()">Mentés</button>
+        <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
+</mat-dialog-actions>

@@ -1,0 +1,48 @@
+
+<div class="container">
+    <h1>Feladat létrehozása</h1>
+    <mat-form-field>
+            <input 
+                matInput 
+                placeholder="Feladat megnevezése"
+                name="task_name"
+                [(ngModel)]="taskModel.issueName"
+                required>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field >
+            <textarea 
+                matInput 
+                placeholder="Feladat leírás"
+                name = "task_description"
+                [(ngModel)]="taskModel.description"
+                required>
+            </textarea>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+            <mat-label>Felelős személy</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let mamber of groupMambers" [value]="mamber.id">
+                {{mamber.fullName}}
+              </mat-option>
+            </mat-select>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+            <input 
+            type="number"
+            min="0"
+            step="0.5"
+                matInput 
+                placeholder="Becsült idő"
+                name="task_name"
+                [(ngModel)]="taskModel.issueName">
+    </mat-form-field>
+    <br>
+    <button class="btn btn-primary">Létrehozás</button>
+    <button class="btn btn-default">Vissza</button>
+</div>   

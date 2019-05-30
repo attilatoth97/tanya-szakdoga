@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="tothattila" id="2018.10.04/06:53-1">
+			<createTable tableName="group_table">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="group_name" type="VARCHAR(100)">
+					<constraints nullable="false" />
+				</column>
+				<column name="create_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+			</createTable>
+	</changeSet>
+		
+	<changeSet author="tothattila" id="2018.10.04/06:53-2">
+		<createTable tableName="person">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="first_name" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="last_name" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="date_of_birth" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+					<constraints nullable="false" />
+				</column>
+				<column name="place_of_birth" type="VARCHAR(100)">
+					<constraints nullable="false" />
+				</column>
+				<column name="phone_number" type="VARCHAR(100)"/>
+				<column name="email" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+		</createTable>
+	</changeSet>
+		
+		<changeSet author="tothattila" id="2018.10.04/06:53-3">
+			<createTable tableName="user_table">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="user_name" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="password" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="person_id" type="BIGINT"/>
+			</createTable>
+		</changeSet>
+		
+		<changeSet author="tothattila" id="2018.10.04/06:53-4">
+			<createTable tableName="project">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="project_name" type="VARCHAR(100)">
+					<constraints nullable="false" />
+				</column>
+				<column name="group_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="description" type="VARCHAR(1000)"/>
+				<column name="create_user_id" type="BIGINT">
+					<constraints nullable="false"/>
+				</column>
+				<column name="is_finished" type="BOOLEAN">
+					<constraints nullable="false"/>
+				</column>
+			</createTable>
+		</changeSet>
+		
+		<changeSet author="tothattila" id="2018.11.02/15:53-15">
+			<createTable tableName="user_in_group">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="group_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="group_role" type="VARCHAR(50)"/>
+			</createTable>
+		</changeSet>
+		
+		<changeSet author="tothattila" id="2018.11.02/15:53-2">
+			<createTable tableName="user_working">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="project_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="project_role" type="VARCHAR(50)"/>
+			</createTable>
+		</changeSet>
+	
+		<changeSet author="tothattila" id="2018.11.02/15:53-3">
+			<createTable tableName="development_log">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="project_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="developed_hours" type="TINYINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="day" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+					<constraints nullable="false" />
+				</column>
+				<column name="task_id" type="BIGINT"/>
+				<column name="description" type="VARCHAR(1000)"/>
+			</createTable>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.02/15:53-4">
+			<createTable tableName="sprint">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="project_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="date_of_start" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+				<column name="date_of_end" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+			</createTable>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.02/15:53-5">
+			<createTable tableName="task">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="issue_name" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="date_of_create" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+					<constraints nullable="false" />
+				</column>
+				<column name="create_user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="description" type="VARCHAR(1000)"/>
+				<column name="sprint_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="responsible_user_id" type="BIGINT"/>
+				<column name="issue_status" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+				<column name="is_close" type="BOOLEAN">
+					<constraints nullable="false" />
+				</column>
+				<column name="serial_number" type="BIGINT"/>
+			</createTable>
+	</changeSet>
+
+	<changeSet author="tothattila" id="2018.11.02/15:53-6">
+			<createTable tableName="calendar">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="title" type="VARCHAR(20)">
+				<constraints nullable="false" />
+				</column>
+				<column name="description" type="VARCHAR(1000)"/>
+				<column name="project_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="create_user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+					<constraints nullable="false" />
+				</column>
+			</createTable>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.02/15:53-7">
+			<createTable tableName="comment">
+				<column name="id" type="BIGINT" autoIncrement="true">
+					<constraints primaryKey="true" nullable="false" />
+				</column>
+				<column name="text" type="VARCHAR(1000)">
+					<constraints nullable="false" />
+				</column>
+				<column name="date_of_create" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+					<constraints nullable="false" />
+				</column>
+				<column name="task_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+			</createTable>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-1">
+		<addForeignKeyConstraint constraintName="fk_user_person_id" referencedTableName="person" baseColumnNames="person_id" baseTableName="user_table" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-2">
+		<addForeignKeyConstraint constraintName="fk_project_group_id" 
+		referencedTableName="group_table" baseColumnNames="group_id" baseTableName="project" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_project_create_user_id" 
+		referencedTableName="user_table" baseColumnNames="create_user_id" baseTableName="project" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-3">
+		<addForeignKeyConstraint constraintName="fk_user_working_user_id" referencedTableName="user_table" baseColumnNames="user_id" baseTableName="user_working" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_user_working_project_id" referencedTableName="project" baseColumnNames="project_id" baseTableName="user_working" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-4">
+		<addForeignKeyConstraint constraintName="fk_sprint_project_id" referencedTableName="project" baseColumnNames="project_id" baseTableName="sprint" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-5">
+		<addForeignKeyConstraint constraintName="fk_task_create_user_id" referencedTableName="user_table" baseColumnNames="create_user_id" baseTableName="task" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_task_sprint_id" referencedTableName="sprint" baseColumnNames="sprint_id" baseTableName="task" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_task_responsible_user_id" referencedTableName="user_table" baseColumnNames="responsible_user_id" baseTableName="task" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-6">
+		<addForeignKeyConstraint constraintName="fk_comment_task_id" referencedTableName="task" baseColumnNames="task_id" baseTableName="comment" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_comment_user_id" referencedTableName="user_table" baseColumnNames="user_id" baseTableName="comment" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-8">
+		<addForeignKeyConstraint constraintName="fk_calendar_project_id" referencedTableName="project" baseColumnNames="project_id" baseTableName="calendar" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_calendar_create_user_id" referencedTableName="user_table" baseColumnNames="create_user_id" baseTableName="calendar" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.04/13:25-9">
+		<addForeignKeyConstraint constraintName="fk_development_log_project_id" referencedTableName="project" baseColumnNames="project_id" baseTableName="development_log" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_development_log_user_id" referencedTableName="user_table" baseColumnNames="user_id" baseTableName="development_log" referencedColumnNames="id"/>
+	</changeSet>
+	<!--  -->
+	<changeSet author="tothattila" id="2018.11.30/23:00-1">
+			<createTable tableName="user_role">
+				<column name="user_id" type="BIGINT">
+					<constraints nullable="false" />
+				</column>
+				<column name="user_role" type="VARCHAR(50)">
+					<constraints nullable="false" />
+				</column>
+			</createTable>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2018.11.30/23:00-2">
+				<addForeignKeyConstraint constraintName="fk_user_role_user_id" referencedTableName="user_table" baseColumnNames="user_id" baseTableName="user_role" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.03.16/13:25-1">
+		<addForeignKeyConstraint constraintName="fk_user_in_group_user_id" referencedTableName="user_table" baseColumnNames="user_id" baseTableName="user_in_group" referencedColumnNames="id"/>
+		<addForeignKeyConstraint constraintName="fk_user_in_group_group_id" referencedTableName="group_table" baseColumnNames="group_id" baseTableName="user_in_group" referencedColumnNames="id"/>
+	</changeSet>
+	
+	
+	<changeSet author="tothattila" id="2019.03.16/13:25-2">
+				<addForeignKeyConstraint constraintName="fk_development_log_task_id" referencedTableName="task" baseColumnNames="task_id" baseTableName="development_log" referencedColumnNames="id"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.05.01/13:00-1">
+				<addColumn tableName="group_table">
+					<column name="create_user_id" type="BIGINT"></column>
+				</addColumn>
+				<addForeignKeyConstraint constraintName="fk_group_table_create_user_id" referencedTableName="user_table" baseColumnNames="create_user_id" baseTableName="group_table" referencedColumnNames="id"/>
+				
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.05.02/23:00-1">
+				<dropColumn tableName="user_in_group" columnName="group_role"/>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.05.05/21:32-1">
+				<addColumn tableName="sprint">
+					<column name="sprint_name" type="VARCHAR(50)"></column>
+				</addColumn>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.05.07/21:42-1">
+				<dropColumn tableName="task" columnName="serial_number"/>
+				<addColumn tableName="task">
+					<column name="issue_type" type="VARCHAR(50)">
+						<constraints nullable="false"/>
+					</column>
+					<column name="date_of_last_revisal" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+						<constraints nullable="false" />
+					</column>
+					<column name="estimated_time" type="TINYINT"/>
+				</addColumn>
+	</changeSet>
+	
+	<changeSet author="tothattila" id="2019.05.30/00:41-1">
+				<dropNotNullConstraint tableName="person" columnName="date_of_birth"/>
+				<dropNotNullConstraint tableName="person" columnName="place_of_birth"/>
+
+	</changeSet>
+ </databaseChangeLog>
