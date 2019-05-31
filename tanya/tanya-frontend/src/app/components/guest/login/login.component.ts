@@ -36,7 +36,7 @@ export class LoginComponent  {
         this.authService.getToken(this.login).subscribe((token) => {
           window.localStorage.setItem('id_token', token[0]);
           this.toast.success('Sikeres bejelentkezés');
-          window.location.replace( frontendUrl + 'home');
+          window.location.replace( frontendUrl);
         }
         );
       }
