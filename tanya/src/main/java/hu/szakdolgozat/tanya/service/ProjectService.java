@@ -107,7 +107,7 @@ public class ProjectService {
 
 	public boolean isProjectNameUnique(Long groupId, String projectName) {
 		List<Project> projects = projectRepository.findByGroupId(groupId);
-		if (projects.stream().map(Project::getProjectName).collect(Collectors.toList()).contains(projectName)) {
+		if(projects.stream().map(Project::getProjectName).collect(Collectors.toList()).contains(projectName)) {
 			return false;
 		}
 		return true;

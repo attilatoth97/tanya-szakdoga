@@ -101,6 +101,9 @@ public class GroupService {
 	public void addNewMemberForGroup(Long groupId, String userName) {
 		Group group = findOne(groupId);
 		User user = userService.findUserByUserName(userName);
+		if(user == null) {
+			throw new TanyaException("Nem létezik ilyen felhasználó!");
+		} 
 		addNewMemberForGroup(group, user);
 	}
 
