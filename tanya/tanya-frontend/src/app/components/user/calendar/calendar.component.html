@@ -1,5 +1,7 @@
 
 
 <div class="container">
-        <ngx-fullcalendar defaultView="month" [events]="events" [options]="options"></ngx-fullcalendar>
+        <h1>Naptár</h1>
+        <button class="btn btn-primary" (click)="openCalendarDialog()">Időpont felvétel</button>
+        <ngx-fullcalendar defaultView="month" [events]="events" [options]="options" (onEventClick)="eventClick($event)"></ngx-fullcalendar>
 </div>

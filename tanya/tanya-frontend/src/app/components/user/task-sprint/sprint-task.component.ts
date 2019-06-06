@@ -6,19 +6,6 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SprintEditorDTO } from 'src/app/model/sprint.editor.dto';
 import { ToastrService } from 'ngx-toastr';
 
-export interface PeriodicElement {
-    name: string;
-    index: number;
-    type: string;
-  }
-
-  const ELEMENT_DATA: PeriodicElement[] = [
-    {index: 1, name: 'Design-startpage', type: 'Feature'},
-    {index: 2, name: 'Bugfix-table', type: 'Bugfix'},
-    {index: 3, name: 'Projekt bemutato oldal',  type: 'Feature'},
-    {index: 4, name: 'Sprint ek listázása', type: 'Feature'},
-  ];
-
 @Component({
     selector: 'app-sprint-task-component',
     templateUrl: './sprint-task.component.html',
@@ -37,6 +24,7 @@ export class SprintTaskComponent implements OnInit {
                 private activeRoute: ActivatedRoute,
                 private route: Router,
                 private dialog: MatDialog) {}
+
     ngOnInit(): void {
         this.initSprintAndTask();
     }

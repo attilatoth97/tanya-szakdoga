@@ -21,7 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './authguard/auth.interceptor';
 import { NgxFullCalendarModule } from 'ngx-fullcalendar';
-import { CalendarComponent } from './components/user/calendar/calendar.component';
+import { CalendarComponent, CalendarDialog } from './components/user/calendar/calendar.component';
 import { CommentViewComponent } from './components/user/comment/comment-view.component';
 import { TaskCreateComponent } from './components/user/task/task-create/task-create.component';
 import { ResponseInterceptor } from './authguard/responseInterceptor';
@@ -46,13 +46,15 @@ import { TaskUpdateComponent } from './components/user/task/task-update/task-upd
     SprintDialog,
     CommentViewComponent,
     TaskCreateComponent,
-    TaskUpdateComponent
+    TaskUpdateComponent,
+    CalendarDialog
   ],
   entryComponents: [
     CreateOrUpdateGroupDialog,
     ProjectDialog,
     UserAddDialog,
     SprintDialog,
+    CalendarDialog
   ],
   imports: [
     BrowserModule,
