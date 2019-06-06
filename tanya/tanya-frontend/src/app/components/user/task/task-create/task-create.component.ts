@@ -8,6 +8,8 @@ import { Observable, forkJoin } from 'rxjs';
 import { SprintService } from 'src/app/service/sprint.service';
 import { SprintMapDTO } from 'src/app/model/sprint.map.dto';
 import { ToastrService } from 'ngx-toastr';
+import { IssueType } from 'src/app/model/enum/issue-type.enum';
+import { IssueStatus } from 'src/app/model/enum/issue-status.enum';
 
 @Component({
     selector: 'app-task-create-component',
@@ -22,9 +24,8 @@ export class TaskCreateComponent implements OnInit {
     groupMambers: UserMiniDTO[] = [];
     projectId: number;
     sprints: SprintMapDTO[] = [];
-    issueType: IssueType;
-    issueTypes: IssueType[];
-    issueStatus: IssueStatus;
+    issueTypes: Array<String> = [];
+    issueStatus: Array<String> = [];
     constructor(private taskService: TaskService, private projectService: ProjectService, private sprintService: SprintService,
           private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) {}
 
@@ -40,8 +41,6 @@ export class TaskCreateComponent implements OnInit {
             this.projectService.getMiniUserInGroup(this.projectId),
             this.sprintService.getTheProjectsSprints(this.projectId)
         ).subscribe(([users, sprints]) => {
-            console.log('users :' + users);
-            console.log('sprints : ' + sprints);
             this.groupMambers = users;
             this.sprints = sprints;
         }, () => {
@@ -64,7 +63,13 @@ export class TaskCreateComponent implements OnInit {
     }
 
     initEnum() {
+        Object.keys(IssueType).forEach(e => {
+            this.issueTypes.push(e);
+        });
 
+        Object.keys(IssueStatus).forEach(e => {
+            this.issueStatus.push(e);
+        });
     }
 
 }

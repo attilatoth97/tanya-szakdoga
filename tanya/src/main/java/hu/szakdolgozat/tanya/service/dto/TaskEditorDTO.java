@@ -1,6 +1,7 @@
 package hu.szakdolgozat.tanya.service.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import hu.szakdolgozat.tanya.entity.enumeration.IssueStatus;
 import hu.szakdolgozat.tanya.entity.enumeration.IssueType;
@@ -18,10 +19,10 @@ public class TaskEditorDTO {
 
 	private Long responsibleUserId;
 
-	@NotBlank
+	@NotNull
 	private IssueStatus issueStatus;
 
-	@NotBlank
+	@NotNull
 	private IssueType issueType;
 
 	private Long sprintId;

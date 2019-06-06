@@ -29,7 +29,7 @@ export interface PeriodicElement {
 
 export class SprintTaskComponent implements OnInit {
 
-    displayedColumns: string[] = ['index', 'name', 'type'];
+    displayedColumns: string[] = ['issueName', 'createUserName', 'responsibleUserName', 'issueStatus', 'issueType'];
     sprints: SprintDTO[];
     buttonDisable = false;
     projectId: number;

@@ -13,6 +13,7 @@ import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.entity.Sprint;
 import hu.szakdolgozat.tanya.entity.User;
 import hu.szakdolgozat.tanya.entity.UserInGroup;
+import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.ProjectRepository;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
@@ -42,11 +43,11 @@ public class ProjectService {
 		User loggedUser = userService.getLoggedUser();
 		Group group = groupService.findOne(editerDto.getGroupId());
 		if (group == null) {
-			// TODO létezik ilyen
+			throw new TanyaException("Nem létezik ilyen csoport!");
 		}
 
 		if (!isProjectNameUnique(editerDto.getGroupId(), editerDto.getProjectName())) {
-			// TODO EXCE project név egyedi this group
+			throw new TanyaException("A projektnevének egyedinek kell lennie!");
 		}
 		Project project = projectMapper.toEntity(editerDto);
 		project.setCreateUser(loggedUser);
@@ -69,7 +70,7 @@ public class ProjectService {
 	public ProjectEditerDTO getProjectEditer(Long id) {
 		Project project = findOne(id);
 		if (project == null) {
-			// TODO throw new exceptions
+			throw new TanyaException("Nem létezik ilyen projekt!");
 		}
 
 		return projectMapper.toEditerDTO(project);
@@ -78,7 +79,7 @@ public class ProjectService {
 	public ProjectDTO getProject(Long id) {
 		Project project = findOne(id);
 		if (project == null) {
-			// TODO throw new exceptions
+			throw new TanyaException("Nem létezik ilyen projekt!");
 		}
 		return projectMapper.toDTO(project);
 	}
@@ -86,14 +87,14 @@ public class ProjectService {
 	public Set<ProjectDTO> getProjectsInGroup(Long groupId) {
 		Group group = groupService.findOne(groupId);
 		if (group == null) {
-			// TODO throw new exceptions
+			throw new TanyaException("Nem létezik ilyen csoport!");
 		}
 		Set<ProjectDTO> result = new HashSet<ProjectDTO>();
 
 		group.getProjects().stream().forEach(e -> {
 			ProjectDTO dto = projectMapper.toDTO(e);
 			dto.setSprintNumber(e.getSprints().stream().count());
-			dto.setTaskNumber(e.getSprints().stream().map(Sprint::getTasks).map(List::stream).count());
+			dto.setTaskNumber(e.getSprints().stream().map(Sprint::getTasks).flatMap(List::stream).count());
 			result.add(dto);
 		});
 

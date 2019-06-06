@@ -73,15 +73,15 @@ public class Task {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User responsibleUser;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "issue_status")
 	private IssueStatus issueStatus;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "issue_type")
-	private IssueType IssueType;
+	private IssueType issueType;
 
 	@Column(name = "is_close")
 	private Boolean isClose;

@@ -1,4 +1,4 @@
-enum IssueStatus {
+export enum IssueStatus {
     BACKLOG = 'BACKLOG',
     PLANING = 'PLANING',
     DEVELOPMENT_DOING = 'DEVELOPMENT_DOING',

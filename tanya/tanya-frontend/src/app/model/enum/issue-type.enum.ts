@@ -1,4 +1,4 @@
-enum IssueType {
+export enum IssueType {
     FEATURE = 'FEATURE',
     PATCH = 'PATCH',
     BUGFIX = 'BUGFIX'

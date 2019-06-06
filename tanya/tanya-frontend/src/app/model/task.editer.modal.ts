@@ -1,3 +1,6 @@
+import { IssueType } from './enum/issue-type.enum';
+import { IssueStatus } from './enum/issue-status.enum';
+
 export interface TaskEditerDTO {
     id: number;
     issueName: string;

@@ -47,8 +47,17 @@ public class TaskService {
 				UserUtil.getAuthenticatedUser().getId())) {
 			throw new TanyaException("Nincs jogosultságod ehhez a csoporthoz");
 		}
-
+		
 		Task task = taskMapper.toEntity(editorDTO);
+		if(editorDTO.getResponsibleUserId() != null) {
+			User responsibleUser = userService.findOne(editorDTO.getResponsibleUserId());
+			if(authorityService.isMemberForTheGroup(sprint.getProject().getGroup().getId(), responsibleUser.getId())) {
+				task.setResponsibleUser(responsibleUser);
+			} else {
+				throw new TanyaException("Nincs jogosultságod ehhez a csoporthoz");
+			}
+		}
+		
 		task.setCreateUser(creater);
 		task.setIsClose(false);
 		task.setDateOfCreate(Instant.now());
