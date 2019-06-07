@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.ProjectMapDTO;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
@@ -19,4 +20,5 @@ public interface ProjectMapper {
 	@Mapping(source = "createUser.userName", target = "createrUsername")
 	ProjectDTO toDTO(Project entity);
 
+	ProjectMapDTO toMapDTO(Project entity);
 }

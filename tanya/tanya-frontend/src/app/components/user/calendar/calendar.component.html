@@ -2,6 +2,15 @@
 
 <div class="container">
         <h1>Naptár</h1>
-        <button class="btn btn-primary" (click)="openCalendarDialog()">Időpont felvétel</button>
+        <button class="btn btn-primary" (click)="openCalendarDialogEvent()">Időpont felvétel</button>
+        <h2>Szűrő</h2>
+        <mat-form-field>
+                        <mat-label>Projektek</mat-label>
+                        <mat-select [(ngModel)]="selectProjectId" name="project" (selectionChange)="onChange()">
+                          <mat-option *ngFor="let project of projectMap" [value]="project.id">
+                            {{project.projectName}}
+                          </mat-option>
+                        </mat-select>
+                </mat-form-field>
         <ngx-fullcalendar defaultView="month" [events]="events" [options]="options" (onEventClick)="eventClick($event)"></ngx-fullcalendar>
 </div>

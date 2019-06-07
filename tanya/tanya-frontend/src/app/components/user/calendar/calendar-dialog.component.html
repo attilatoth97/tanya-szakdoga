@@ -16,9 +16,15 @@
                 [(ngModel)]="calendar.description">
         </mat-form-field>
     <br>
-    <!--
-        select projekt name
-    -->
+    <mat-form-field>
+            <mat-label>Projektek</mat-label>
+            <mat-select [(ngModel)]="calendar.projectId" name="project">
+              <mat-option *ngFor="let project of projectMap" [value]="project.id">
+                {{project.projectName}}
+              </mat-option>
+            </mat-select>
+    </mat-form-field>
+    <br>
     <div>
         <mat-form-field class="example-full-width">
                 <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Időpont" name="dateOfStart" [(ngModel)]="calendar.date">

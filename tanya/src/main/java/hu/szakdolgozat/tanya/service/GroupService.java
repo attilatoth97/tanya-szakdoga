@@ -81,16 +81,22 @@ public class GroupService {
 	}
 
 	public List<GroupDTO> getUserCreatedGroups() {
-		JwtUserDetails userDetails = UserUtil.getAuthenticatedUser();
-		return groupRepository.findAllGroupForUserCreated(userDetails.getId()).stream().map(groupMapper::toDTO)
+		return getUserCreatedGroupsRepositry().stream().map(groupMapper::toDTO)
 				.collect(Collectors.toList());
+	}
+	
+	protected List<Group> getUserCreatedGroupsRepositry(){
+		Long id = UserUtil.getAuthenticatedUser().getId();
+		return groupRepository.findAllGroupForUserCreated(id);
 	}
 
 	public List<GroupDTO> getGroupsWhereUserAttendant() {
+		return getGroupsWhereUserAttendantRepositry().stream().map(groupMapper::toDTO).collect(Collectors.toList());
+	}
+	
+	protected List<Group> getGroupsWhereUserAttendantRepositry(){
 		Long id = UserUtil.getAuthenticatedUser().getId();
-		List<Group> groups = userInGroupRepository.getGroupsWhereUserAttendant(id);
-
-		return groups.stream().map(groupMapper::toDTO).collect(Collectors.toList());
+		return userInGroupRepository.getGroupsWhereUserAttendant(id);
 	}
 
 	// TODO ellenőrzés logged useré e

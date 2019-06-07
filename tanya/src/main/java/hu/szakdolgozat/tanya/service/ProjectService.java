@@ -1,5 +1,6 @@
 package hu.szakdolgozat.tanya.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.ProjectRepository;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.ProjectMapDTO;
 import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 import hu.szakdolgozat.tanya.service.mapper.ProjectMapper;
 import hu.szakdolgozat.tanya.service.mapper.UserMapper;
@@ -89,7 +91,7 @@ public class ProjectService {
 		if (group == null) {
 			throw new TanyaException("Nem létezik ilyen csoport!");
 		}
-		Set<ProjectDTO> result = new HashSet<ProjectDTO>();
+		Set<ProjectDTO> result = new HashSet<>();
 
 		group.getProjects().stream().forEach(e -> {
 			ProjectDTO dto = projectMapper.toDTO(e);
@@ -118,6 +120,13 @@ public class ProjectService {
 		Group group = project.getGroup();
 		return group.getUsers().stream().map(UserInGroup::getUser).map(userMapper::toMiniDTO)
 				.collect(Collectors.toList());
+	}
+	
+	public List<ProjectMapDTO> getProjectMiniDTOOwn(){
+		List<ProjectMapDTO> result = new ArrayList<>();
+		result.addAll(groupService.getGroupsWhereUserAttendantRepositry().stream().map(Group::getProjects).flatMap(Set::stream).map(projectMapper::toMapDTO).collect(Collectors.toList()));
+		result.addAll(groupService.getUserCreatedGroupsRepositry().stream().map(Group::getProjects).flatMap(Set::stream).map(projectMapper::toMapDTO).collect(Collectors.toList()));
+		return result;
 	}
 
 }

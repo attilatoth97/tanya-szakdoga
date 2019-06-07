@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProjectDTO } from '../model/project.dto.modal';
 import { backendUrl } from '../app.constant';
 import { UserMiniDTO } from '../model/user.mini.dto';
+import { ProjectMapDTO } from '../model/project.map.dto.modal';
 
 @Injectable()
 export class ProjectService {
@@ -40,6 +41,11 @@ export class ProjectService {
     public getMiniUserInGroup(id: number): Observable<UserMiniDTO[]> {
         const params = new HttpParams();
         return this.http.get<UserMiniDTO[]>(this.baseUrl + 'project/' + id + '/user' );
+    }
+
+    public getProjectMiniDTOOwn(): Observable<ProjectMapDTO[]> {
+        const params = new HttpParams();
+        return this.http.get<ProjectMapDTO[]>(this.baseUrl + 'project/map' );
     }
 
 }

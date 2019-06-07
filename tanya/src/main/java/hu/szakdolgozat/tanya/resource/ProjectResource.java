@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.szakdolgozat.tanya.service.ProjectService;
 import hu.szakdolgozat.tanya.service.dto.ProjectDTO;
 import hu.szakdolgozat.tanya.service.dto.ProjectEditerDTO;
+import hu.szakdolgozat.tanya.service.dto.ProjectMapDTO;
 import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 
 @RestController
@@ -51,6 +52,11 @@ public class ProjectResource {
 	@GetMapping("/project/{id}/user")
 	public ResponseEntity<List<UserMiniDTO>> getMiniUserInGroup(@PathVariable("id") Long id) {
 		return ResponseEntity.ok().body(projectService.getAllMiniUserInGroup(id));
+	}
+	
+	@GetMapping("/project/map")
+	public ResponseEntity<List<ProjectMapDTO>> getProjectMiniDTOOwn() {
+		return ResponseEntity.ok().body(projectService.getProjectMiniDTOOwn());
 	}
 
 }
