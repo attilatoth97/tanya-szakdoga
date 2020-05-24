@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FullCalendarOptions, EventObject } from 'ngx-fullcalendar';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { CalendarDTO } from 'src/app/model/calendar.dto.modal';
 import { CalendarEditerDTO } from 'src/app/model/calendar.editer.dto.modal';
@@ -17,24 +17,24 @@ import { ProjectService } from 'src/app/service/project.service';
 export class CalendarComponent implements OnInit {
 
     options: FullCalendarOptions;
-    calendar: CalendarDTO[] =  [];
+    calendar: CalendarDTO[] = [];
     events: EventObject[] = [];
     buttonDisable = false;
     calendarId: number;
     projectMap: ProjectMapDTO[] = [];
     selectProjectId: number;
     constructor(private dialog: MatDialog,
-        private calendarSerivce: CalendarService, private projectService: ProjectService) {}
+        private calendarSerivce: CalendarService, private projectService: ProjectService) { }
 
     ngOnInit(): void {
         this.options = {
             defaultDate: new Date,
             editable: false,
-            };
-          /*this.events = [
-            { id: 'b', title: 'Friends coming round', allDay: true, start: new Date },
-            { id: 'c', title: 'Winter is Coming', allDay: false, start: new Date, end: new Date(2019, 6, 10, 10, 14, 20) }];*/
-            this.initProjectSelect();
+        };
+        /*this.events = [
+          { id: 'b', title: 'Friends coming round', allDay: true, start: new Date },
+          { id: 'c', title: 'Winter is Coming', allDay: false, start: new Date, end: new Date(2019, 6, 10, 10, 14, 20) }];*/
+        this.initProjectSelect();
 
     }
 
@@ -86,12 +86,12 @@ export class CalendarComponent implements OnInit {
             width: '500px',
             height: '425px',
             data: this.calendarId,
-          });
+        });
 
-          dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(result => {
             this.buttonDisable = false;
             this.initCalendar();
-          });
+        });
     }
 
 }
@@ -99,7 +99,7 @@ export class CalendarComponent implements OnInit {
     selector: 'app-calendar-dialog-component',
     templateUrl: './calendar-dialog.component.html',
     providers: [CalendarService, ProjectService]
-  })
+})
 // tslint:disable-next-line:component-class-suffix
 export class CalendarDialog implements OnInit {
 
@@ -117,33 +117,33 @@ export class CalendarDialog implements OnInit {
         private calendarService: CalendarService,
         private projectService: ProjectService,
         @Inject(MAT_DIALOG_DATA) public data: number,
-        ) {}
+    ) { }
 
-        ngOnInit(): void {
-            this.initProjectSelect();
-        }
+    ngOnInit(): void {
+        this.initProjectSelect();
+    }
 
-        onNoClick(): void {
+    onNoClick(): void {
         this.dialogRef.close();
-        }
+    }
 
-        save() {
-           this.calendar.id = this.data;
-           const callService = this.calendar.id ?
+    save() {
+        this.calendar.id = this.data;
+        const callService = this.calendar.id ?
             this.calendarService.update(this.calendar) : this.calendarService.create(this.calendar);
-           callService.subscribe(sprint => {
-                if (sprint) {
-                    this.toast.success('Sikeres mentés');
-                    this.dialogRef.close();
-                } else {
-                    this.toast.error('Sikertelen mentés');
-                }
-            });
-        }
+        callService.subscribe(sprint => {
+            if (sprint) {
+                this.toast.success('Sikeres mentés');
+                this.dialogRef.close();
+            } else {
+                this.toast.error('Sikertelen mentés');
+            }
+        });
+    }
 
-        private initProjectSelect() {
-            this.projectService.getProjectMiniDTOOwn().subscribe(e => {
-                this.projectMap = e;
-            });
-        }
-  }
+    private initProjectSelect() {
+        this.projectService.getProjectMiniDTOOwn().subscribe(e => {
+            this.projectMap = e;
+        });
+    }
+}

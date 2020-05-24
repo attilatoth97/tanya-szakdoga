@@ -1,5 +1,4 @@
 import { OnInit, Component } from '@angular/core';
-import { initChangeDetectorIfExisting } from '@angular/core/src/render3/instructions';
 
 @Component({
     selector: 'app-start-page-component',
