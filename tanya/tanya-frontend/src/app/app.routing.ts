@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicHomeComponent } from './components/public-home.component';
 import { RegistrationComponent } from './components/guest/registration/registration.component';
-import { AppComponent } from './app.component';
 import { StartPageComponent } from './components/guest/startpage/start-page.component';
 import { LoginComponent } from './components/guest/login/login.component';
 import { AuthguardGuard } from './authguard/authguard.guard';
@@ -13,6 +12,7 @@ import { SprintTaskComponent } from './components/user/task-sprint/sprint-task.c
 import { TaskViewComponent } from './components/user/task/task-view.component';
 import { CalendarComponent } from './components/user/calendar/calendar.component';
 import { TaskCreateComponent } from './components/user/task/task-create/task-create.component';
+import { CurrentUserTaskComponent } from './components/user/current-user-task/current-user-task.component';
 
 const appRoutes: Routes = [
     {
@@ -40,6 +40,7 @@ const appRoutes: Routes = [
             { path: 'task-view', component: TaskViewComponent },
             { path: 'task-create/:id', component: TaskCreateComponent },
             { path: 'calendar', component: CalendarComponent },
+            { path: 'current-user-task', component: CurrentUserTaskComponent }
         ]
     },
 ];
