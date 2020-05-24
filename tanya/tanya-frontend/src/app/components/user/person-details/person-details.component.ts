@@ -66,11 +66,11 @@ export class PersonDetailsComponent implements OnInit {
     }
 
     public validation() {
-        if ( !this.userModel.userName || !this.userModel.password || !this.passwordAgain
+        if (!this.userModel.userName || !this.userModel.password || !this.passwordAgain
             || !this.personModel.email || !this.personModel.firstName || !this.personModel.lastName) {
-                this.isValid = false;
-                return false;
-            }
+            this.isValid = false;
+            return false;
+        }
         return this.isValid = this.password();
     }
 }

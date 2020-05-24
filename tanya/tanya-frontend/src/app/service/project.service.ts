@@ -10,12 +10,11 @@ import { ProjectMapDTO } from '../model/project.map.dto.modal';
 @Injectable()
 export class ProjectService {
 
-
     private get baseUrl(): string {
         return backendUrl + 'api/';
     }
 
-    constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public create(project: ProjectEditerDTO): Observable<ProjectDTO> {
         const params = new HttpParams();
@@ -29,23 +28,23 @@ export class ProjectService {
 
     public getProjectsInGroup(id: number): Observable<ProjectDTO[]> {
         const params = new HttpParams();
-        return this.http.get<ProjectDTO[]>(this.baseUrl + 'project' + '/' + id );
+        return this.http.get<ProjectDTO[]>(this.baseUrl + 'project' + '/' + id);
     }
 
     // kell ?
     public delete(id: number): Observable<void> {
         const params = new HttpParams();
-        return this.http.delete<void>(this.baseUrl + 'project' + '/' + id );
+        return this.http.delete<void>(this.baseUrl + 'project' + '/' + id);
     }
 
     public getMiniUserInGroup(id: number): Observable<UserMiniDTO[]> {
         const params = new HttpParams();
-        return this.http.get<UserMiniDTO[]>(this.baseUrl + 'project/' + id + '/user' );
+        return this.http.get<UserMiniDTO[]>(this.baseUrl + 'project/' + id + '/user');
     }
 
     public getProjectMiniDTOOwn(): Observable<ProjectMapDTO[]> {
         const params = new HttpParams();
-        return this.http.get<ProjectMapDTO[]>(this.baseUrl + 'project/map' );
+        return this.http.get<ProjectMapDTO[]>(this.baseUrl + 'project/map');
     }
 
 }

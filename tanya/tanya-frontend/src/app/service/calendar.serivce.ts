@@ -7,11 +7,12 @@ import { CalendarDTO } from '../model/calendar.dto.modal';
 
 @Injectable()
 export class CalendarService {
+
     private get baseUrl(): string {
         return backendUrl + 'api/';
     }
 
-    constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public create(comment: CalendarEditerDTO): Observable<CalendarDTO> {
         const params = new HttpParams();

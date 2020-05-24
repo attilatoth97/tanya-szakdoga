@@ -66,7 +66,7 @@ import { TaskUpdateComponent } from './components/user/task/task-update/task-upd
     ToastrModule.forRoot(),
     NgxFullCalendarModule
   ],
-  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true }}, {
+  providers: [{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

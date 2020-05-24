@@ -1,29 +1,19 @@
 <form class="formatter-input">
-        <h1>Belépés</h1>
-        
-            <div>
-                    <mat-form-field class="example-full-width">
-                        <input 
-                            matInput 
-                            placeholder="Felhasználónév"
-                            name="loginusername"
-                            [(ngModel)]="userName">
-                    </mat-form-field>
-                </div>   
-        
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <input 
-                            type="password"
-                            matInput 
-                            placeholder="Jelszó"
-                            name="loginpassword"
-                            [(ngModel)]="password">
-                    </mat-form-field>
-                </div>        
+    <h1>Belépés</h1>
 
-                <div class="example-button-row">
-                        <button mat-raised-button color="primary" (click)="getTokenFromBackeEnd()">Belépés</button>
-                </div> 
-    </form>
+    <div>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Felhasználónév" name="loginusername" [(ngModel)]="userName">
+        </mat-form-field>
+    </div>
 
+    <div>
+        <mat-form-field class="example-full-width">
+            <input type="password" matInput placeholder="Jelszó" name="loginpassword" [(ngModel)]="password">
+        </mat-form-field>
+    </div>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="getTokenFromBackeEnd()">Belépés</button>
+    </div>
+</form>

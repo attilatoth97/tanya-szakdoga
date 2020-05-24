@@ -12,7 +12,7 @@ import { TaskService } from 'src/app/service/task.service';
 export class TaskUpdateComponent implements OnInit {
 
     ngOnInit(): void {
-    
+
     }
 
     update() { }

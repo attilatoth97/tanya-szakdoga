@@ -3,103 +3,69 @@
     <form #f>
         <div>
             <mat-form-field class="example-full-width">
-                <input 
-                    matInput 
-                    placeholder="Felhasználónév"
-                    name = "username"
-                    [(ngModel)]="userModel.userName"
-                    required>
+                <input matInput placeholder="Felhasználónév" name="username" [(ngModel)]="userModel.userName" required>
             </mat-form-field>
-        </div>   
+        </div>
 
         <div>
             <mat-form-field class="example-full-width">
-                <input 
-                    matInput 
-                    placeholder="Jelszó"
-                    name = "password"
-                    type="password"
-                    [(ngModel)]="userModel.password"
-                    (ngModelChange) = "password()"
-                    required>
+                <input matInput placeholder="Jelszó" name="password" type="password" [(ngModel)]="userModel.password"
+                    (ngModelChange)="password()" required>
             </mat-form-field>
-        </div>  
+        </div>
 
         <div>
             <mat-form-field class="example-full-width">
-                <input 
-                    matInput 
-                    placeholder="Jelszó újra"
-                    name = "passwordagain"
-                    type= "password"
-                    [(ngModel)]="passwordAgain"
-                    (ngModelChange) = "password()"
-                    required>
+                <input matInput placeholder="Jelszó újra" name="passwordagain" type="password"
+                    [(ngModel)]="passwordAgain" (ngModelChange)="password()" required>
             </mat-form-field>
-        </div> 
+        </div>
 
         <div>
             <mat-form-field class="example-full-width">
-                <input 
-                    matInput 
-                    placeholder="Email cím"
-                    name= "email"
-                    [(ngModel)]="personModel.email"
-                    (ngModelChange) = "validation()"
-                    required>
+                <input matInput placeholder="Email cím" name="email" [(ngModel)]="personModel.email"
+                    (ngModelChange)="validation()" required>
             </mat-form-field>
-        </div>   
+        </div>
 
-    <div>
+        <div>
             <mat-form-field class="example-full-width">
-                    <input 
-                        matInput 
-                        placeholder="Vezetéknév" 
-                        name= "firstname"
-                        [(ngModel)]="personModel.firstName"
-                        (ngModelChange) = "validation()"
-                        required>
+                <input matInput placeholder="Vezetéknév" name="firstname" [(ngModel)]="personModel.firstName"
+                    (ngModelChange)="validation()" required>
             </mat-form-field>
-    </div>
-        
-    <div>
-        <mat-form-field class="example-full-width">
-            <input matInput 
-                   placeholder="Keresztnév"
-                   name= "lastname"
-                   [(ngModel)]="personModel.lastName"
-                   (ngModelChange) = "validation()"
-                   required>
-        </mat-form-field>
-    </div>
+        </div>
 
-    <div>
-        <mat-form-field class="example-full-width">
-            <input 
-                matInput 
-                placeholder="Születési hely"
-                name= "placeofbirth"
-                [(ngModel)]="personModel.placeOfBirth">
-        </mat-form-field>
-    </div>
-    
-    <div>
+        <div>
             <mat-form-field class="example-full-width">
-                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Születési dátum" name="dateofbirth" [(ngModel)]="personModel.dateOfBirth">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-    </div>
+                <input matInput placeholder="Keresztnév" name="lastname" [(ngModel)]="personModel.lastName"
+                    (ngModelChange)="validation()" required>
+            </mat-form-field>
+        </div>
 
-  
-    <div class="example-button-row">
-        <button mat-raised-button color="primary" (click)="saveFunction()" [disabled]="!isValid">Regisztráció</button>
-    </div>
-    <span class="valid-error"
-        *ngIf="!isValidPassword">
-        <i>Jelszavaknak egyezniük kell!</i>
-    </span>
-        
-</form>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Születési hely" name="placeofbirth" [(ngModel)]="personModel.placeOfBirth">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Születési dátum"
+                    name="dateofbirth" [(ngModel)]="personModel.dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" (click)="saveFunction()"
+                [disabled]="!isValid">Regisztráció</button>
+        </div>
+        <span class="valid-error" *ngIf="!isValidPassword">
+            <i>Jelszavaknak egyezniük kell!</i>
+        </span>
+
+    </form>
 
 </div>

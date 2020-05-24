@@ -27,7 +27,7 @@ export class TaskCreateComponent implements OnInit {
     issueTypes: Array<String> = [];
     issueStatus: Array<String> = [];
     constructor(private taskService: TaskService, private projectService: ProjectService, private sprintService: SprintService,
-          private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) {}
+        private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) { }
 
     ngOnInit() {
         this.initModel();
@@ -52,7 +52,7 @@ export class TaskCreateComponent implements OnInit {
     }
 
     saveTask() {
-        this.taskService.create(this.taskModel).subscribe( task => {
+        this.taskService.create(this.taskModel).subscribe(task => {
             if (task) {
                 this.toast.success('Sikeres mentés');
                 this.backnavigate();

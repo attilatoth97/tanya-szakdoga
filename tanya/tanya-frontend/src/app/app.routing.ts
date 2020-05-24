@@ -33,13 +33,13 @@ const appRoutes: Routes = [
                 path: 'login',
                 component: LoginComponent,
             },
-            { path: 'person-details', component: PersonDetailsComponent},
-            { path: 'project-list/:id', component: ProjectListComponent},
-            { path: 'group-list', component: ListGroupComponent},
-            { path: 'sprint-task-list/:id', component: SprintTaskComponent},
-            { path: 'task-view', component: TaskViewComponent},
-            { path: 'task-create/:id', component: TaskCreateComponent},
-            { path: 'calendar', component: CalendarComponent}
+            { path: 'person-details', component: PersonDetailsComponent },
+            { path: 'project-list/:id', component: ProjectListComponent },
+            { path: 'group-list', component: ListGroupComponent },
+            { path: 'sprint-task-list/:id', component: SprintTaskComponent },
+            { path: 'task-view', component: TaskViewComponent },
+            { path: 'task-create/:id', component: TaskCreateComponent },
+            { path: 'calendar', component: CalendarComponent },
         ]
     },
 ];

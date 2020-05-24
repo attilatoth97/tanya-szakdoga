@@ -8,12 +8,11 @@ import { backendUrl } from '../app.constant';
 @Injectable()
 export class CommentService {
 
-
     private get baseUrl(): string {
         return backendUrl + 'api/';
     }
 
-  constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public create(comment: CommentEditerDTO): Observable<CommentDTO> {
         const params = new HttpParams();

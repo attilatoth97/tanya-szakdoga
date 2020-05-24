@@ -5,22 +5,19 @@
 
 <nav class="navbar navbar-dark bg-primary">
         <form class="form-inline">
-                
-                  <ng-container *ngIf="auth.isLogged; else guest"> 
-                        <button class="btn btn-primary" type="button" [routerLink]="['/home']">Kezdőlap</button>
-                                <button class="btn btn-primary" type="button" (click)="logout()">Kijelenetkezés</button>
-                  </ng-container>
-                  <ng-template #guest>
-                                <button class="btn btn-primary" type="button" [routerLink]="['/login']">Belépés</button>
-                                <button class="btn btn-primary" type="button" [routerLink]="['/registration']">Regsiztráció</button>
-                  </ng-template>
-                  
 
-                 <!-- <button class="btn btn-primary" type="button" [routerLink]="['/person-details']">Személyes adatok</button>
+                <ng-container *ngIf="auth.isLogged; else guest">
+                        <button class="btn btn-primary" type="button" [routerLink]="['/home']">Kezdőlap</button>
+                        <button class="btn btn-primary" type="button" (click)="logout()">Kijelenetkezés</button>
+                </ng-container>
+                <ng-template #guest>
+                        <button class="btn btn-primary" type="button" [routerLink]="['/login']">Belépés</button>
+                        <button class="btn btn-primary" type="button"
+                                [routerLink]="['/registration']">Regsiztráció</button>
+                </ng-template>
+
+                <!-- <button class="btn btn-primary" type="button" [routerLink]="['/person-details']">Személyes adatok</button>
                   <button class="btn btn-primary" type="button" [routerLink]="['/person-details']">Csoportok</button>
                   <button class="btn btn-primary" type="button" [routerLink]="['/person-details']">Projektek</button>-->
-                  
-                
-
         </form>
 </nav>
