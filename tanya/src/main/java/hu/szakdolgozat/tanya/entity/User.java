@@ -19,13 +19,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import hu.szakdolgozat.tanya.entity.enumeration.UserRole;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "user_table")
@@ -44,7 +42,6 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Column(name = "user_name")
 	private String userName;
 
 	private String password;
@@ -83,6 +80,8 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<DevelopmentLog> logs;
 
+	public User() {}
+
 	public User(User user) {
 		this.id = user.getId();
 		this.userName = user.getUserName();
@@ -102,9 +101,6 @@ public class User {
 		this.userName = userName;
 		this.password = password;
 		this.role = role;
-	}
-
-	public User() {
 	}
 
 	public String getFullName() {

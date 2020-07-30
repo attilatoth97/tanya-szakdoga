@@ -59,4 +59,5 @@ public class ProjectResource {
 		return ResponseEntity.ok().body(projectService.getProjectMiniDTOOwn());
 	}
 
+
 }

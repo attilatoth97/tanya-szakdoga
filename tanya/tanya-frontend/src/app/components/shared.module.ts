@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatInputModule, MatDialogModule, MatNativeDateModule, MatCardModule, MatIconModule, MatSelectModule, MatExpansionModule
+  MatToolbarModule, MatButtonModule, MatInputModule,
+  MatDialogModule, MatNativeDateModule, MatCardModule, MatIconModule, MatSelectModule, MatExpansionModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';

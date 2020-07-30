@@ -10,7 +10,7 @@ import { TaskMiniDTO } from '../model/task.mini.dto';
 export class TaskService {
 
     private get baseUrl(): string {
-        return backendUrl + 'apis/';
+        return backendUrl + 'api/';
     }
 
     constructor(private http: HttpClient) { }

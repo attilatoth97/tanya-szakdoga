@@ -16,23 +16,17 @@
   <button class="btn btn-primary" (click)="openProjectDialog()">Projekt létrehozása</button>
   <table mat-table [dataSource]="projects" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
     <ng-container matColumnDef="projectName">
       <th mat-header-cell *matHeaderCellDef> Projekt név </th>
       <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="createrUsername">
       <th mat-header-cell *matHeaderCellDef> Létrehozó neve </th>
       <td mat-cell *matCellDef="let element"> {{element.createrUsername}} </td>
     </ng-container>
 
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="sprintNumber">
       <th mat-header-cell *matHeaderCellDef> Sprintek száma </th>
       <td mat-cell *matCellDef="let element"> {{element.sprintNumber}} </td>
