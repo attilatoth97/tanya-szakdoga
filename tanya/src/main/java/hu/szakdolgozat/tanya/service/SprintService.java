@@ -3,6 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import hu.szakdolgozat.tanya.service.dto.SprintDTO;
 import hu.szakdolgozat.tanya.service.dto.SprintEditerDTO;
 import hu.szakdolgozat.tanya.service.dto.SprintMapDTO;
 import hu.szakdolgozat.tanya.service.mapper.SprintMapper;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class SprintService {
@@ -32,7 +35,7 @@ public class SprintService {
 	private GroupService groupService;
 
 	public Sprint findOne(Long id) {
-		return sprintRepository.getOne(id);
+		return sprintRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 	public SprintDTO save(SprintEditerDTO dto) {

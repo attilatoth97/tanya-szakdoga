@@ -1,36 +1,49 @@
-<div class="container-fluid">
-    <h1>Új csoport létrehozása </h1>
-    <button class="btn btn-primary" (click)="createOrUpdateGroup()" [(disabled)]="buttonDisable">
-        <span>Új csoport létrehozása</span>
-    </button>
-    <div class="col-md-12 row">
-        <ul class="list-group col-md-6">
-            <h2>Saját csoportok</h2>
-            <div *ngFor="let group of ownGroup">
-                <li class="list-group-item">
-                    <strong>{{ group.groupName }}</strong>
-                    <span class="text-right col-md-1">
-                        <button class="btn btn-primary" (click)="navigate(group.id)">
-                            <strong>Mutasd</strong> </button>
-                    </span>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Elérhető csoportok</h4>
+                        <p class="card-category">Csoportokkal kapcsolatos funkciók</p>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-info" (click)="createOrUpdateGroup()" [(disabled)]="buttonDisable">
+                            <span>Új csoport létrehozása</span>
+                        </button>
+                        <div class="col-md-12 row">
+                            <ul class="list-group col-md-6">
+                                <h2>Saját csoportok</h2>
+                                <div *ngFor="let group of ownGroup">
+                                    <li class="list-group-item">
+                                        <strong>{{ group.groupName }}</strong>
+                                        <span class="text-right col-md-1">
+                                            <button class="btn btn-info" (click)="navigate(group.id)">
+                                                <strong>Mutasd</strong> </button>
+                                        </span>
 
-                </li>
+                                    </li>
+                                </div>
+                            </ul>
+
+                            <ul class="list-group col-md-6">
+                                <h2>Megosztott csoportok</h2>
+                                <div *ngFor="let group of attendantGroup">
+                                    <li class="list-group-item">
+                                        <strong>{{ group.groupName }}</strong>
+                                        <span> - {{group.createdUserName}}</span>
+
+                                        <span class="text-right col-md-1">
+                                            <button class="btn btn-info" (click)="navigate(group.id)">
+                                                <strong>Mutasd</strong> </button>
+                                        </span>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </ul>
-
-        <ul class="list-group col-md-6">
-            <h2>Megosztott csoportok</h2>
-            <div *ngFor="let group of attendantGroup">
-                <li class="list-group-item">
-                    <strong>{{ group.groupName }}</strong>
-                    <span> - {{group.createdUserName}}</span>
-
-                    <span class="text-right col-md-1">
-                        <button class="btn btn-primary" (click)="navigate(group.id)">
-                            <strong>Mutasd</strong> </button>
-                    </span>
-                </li>
-            </div>
-        </ul>
+        </div>
     </div>
 </div>

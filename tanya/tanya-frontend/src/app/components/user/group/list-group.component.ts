@@ -48,7 +48,6 @@ export class ListGroupComponent implements OnInit {
     }
 
     navigate(id: number) {
-        console.log('test');
         this.route.navigateByUrl('/project-list/' + id);
     }
 

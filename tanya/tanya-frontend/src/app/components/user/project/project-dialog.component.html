@@ -1,17 +1,37 @@
-<h1 mat-dialog-title>Projekt létrehozás</h1>
-<div mat-dialog-content>
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Projekt név" name="project_name" [(ngModel)]="projectModel.projectName">
-    </mat-form-field>
+<div class="card">
+    <div class="card-header card-header-info">
+        <h1 mat-dialog-title>Projekt létrehozás</h1>
+    </div>
+    <div class="card-body">
+        <div class="col-md-12">
+            <div mat-dialog-content>
+                <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field>
+                            <input matInput placeholder="Projekt név" name="project_name"
+                                [(ngModel)]="projectModel.projectName">
+                        </mat-form-field>
+                    </div>
+                </div>
 
-    <br>
-    <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Projekt leírás" name="project_description"
-            [(ngModel)]="projectModel.description">
-            </textarea>
-    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field>
+                            <textarea matInput placeholder="Projekt leírás" name="project_description"
+                                [(ngModel)]="projectModel.description">
+                        </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+        <mat-dialog-actions align="end">
+            <button mat-button class="btn btn-info" (click)="save()">Mentés</button>
+            <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
+        </mat-dialog-actions>
+    </div>
 </div>
-<mat-dialog-actions align="end">
-    <button mat-button class="btn btn-success" (click)="save()">Mentés</button>
-    <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
-</mat-dialog-actions>

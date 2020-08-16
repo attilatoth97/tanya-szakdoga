@@ -28,6 +28,8 @@ import hu.szakdolgozat.tanya.entity.enumeration.UserRole;
 @Entity
 @Table(name = "user_table")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "person", "createdProjects", "userWorkings", "responsibleForTasks", "createdTasks", "comments",
 		"calendars", "logs" })
 @EqualsAndHashCode(exclude = { "person", "createdProjects", "userWorkings", "responsibleForTasks", "createdTasks",
@@ -79,8 +81,6 @@ public class User {
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<DevelopmentLog> logs;
-
-	public User() {}
 
 	public User(User user) {
 		this.id = user.getId();

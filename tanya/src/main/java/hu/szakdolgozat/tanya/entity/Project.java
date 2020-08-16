@@ -15,17 +15,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 @Entity
 @Table(name = "project")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "sprints", "users", "group", "createUser", "calendars", "logs" })
 @EqualsAndHashCode(exclude = { "sprints", "users", "group", "createUser", "calendars", "logs" })
 public class Project {

@@ -7,14 +7,13 @@ export class AuthguardGuard implements CanActivate {
     public isLogged: boolean;
     public isLogged_ = true;
 
-    constructor() {}
+    constructor() { }
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-            this.refresh();
-            console.log('value ' + this.isLogged);
-            return this.isLogged;
+        this.refresh();
+        return this.isLogged;
     }
 
     refresh() {

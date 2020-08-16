@@ -53,7 +53,7 @@ export class ProjectListComponent implements OnInit {
     this.buttonDisable = true;
     const dialogRef = this.dialog.open(ProjectDialog, {
       width: '500px',
-      height: '350px',
+      //height: '350px',
       data: this.groupId,
     });
 
@@ -68,7 +68,7 @@ export class ProjectListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserAddDialog, {
       data: this.groupId,
       width: '500px',
-      height: '350px'
+      //height: '350px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,7 +99,6 @@ export class ProjectDialog {
   }
 
   save() {
-    console.log('save-dialog');
     this.projectModel.groupId = this.data;
     this.projectService.create(this.projectModel).subscribe(project => {
       if (project) {
@@ -134,7 +133,6 @@ export class UserAddDialog {
   }
 
   save() {
-    console.log(this.data);
     this.groupService.addUserForGroup(this.data.valueOf(), this.username).subscribe(() => {
       this.toast.success('Sikeres mentés');
       this.dialogRef.close();

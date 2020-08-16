@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,8 +48,7 @@ public class GroupService {
 	}
 
 	protected Group findOne(Long id) {
-		return groupRepository.getOne(id);
-
+		return groupRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 	public GroupDTO save(GroupDTO dto) {

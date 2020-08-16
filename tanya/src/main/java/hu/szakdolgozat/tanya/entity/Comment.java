@@ -13,17 +13,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 @Entity
 @Table(name="comment")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"task", "user"} )
 @EqualsAndHashCode(exclude = {"task", "user"} )
 public class Comment {

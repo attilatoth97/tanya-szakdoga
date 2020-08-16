@@ -1,34 +1,65 @@
-<h1 mat-dialog-title>Időpont</h1>
-<div mat-dialog-content>
-        <mat-form-field class="example-full-width">
-                <input matInput placeholder="Cím" name="event_title " [(ngModel)]="calendar.title">
-        </mat-form-field>
-        <br>
-        <mat-form-field class="example-full-width">
-                <input matInput placeholder="Leírás" name="event_description " [(ngModel)]="calendar.description">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-                <mat-label>Projektek</mat-label>
-                <mat-select [(ngModel)]="calendar.projectId" name="project">
-                        <mat-option *ngFor="let project of projectMap" [value]="project.id">
-                                {{project.projectName}}
-                        </mat-option>
-                </mat-select>
-        </mat-form-field>
-        <br>
-        <div>
-                <mat-form-field class="example-full-width">
-                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Időpont"
-                                name="dateOfStart" [(ngModel)]="calendar.date">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+<div class="card">
+        <div class="card-header card-header-info">
+                <h1 mat-dialog-title>Időpont felvétel</h1>
         </div>
+        <div class="card-body">
+                <div class="col-md-12">
+                        <div mat-dialog-content>
+                                <div class="row">
+                                        <div class="col-md-8">
+                                                <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Cím" name="event_title "
+                                                                [(ngModel)]="calendar.title">
+                                                </mat-form-field>
 
-        <br>
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-md-8">
+                                                <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="Leírás" name="event_description "
+                                                                [(ngModel)]="calendar.description">
+                                                </mat-form-field>
+
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-md-8">
+                                                <mat-form-field>
+                                                        <mat-label>Projektek</mat-label>
+                                                        <mat-select [(ngModel)]="calendar.projectId" name="project">
+                                                                <mat-option *ngFor="let project of projectMap"
+                                                                        [value]="project.id">
+                                                                        {{project.projectName}}
+                                                                </mat-option>
+                                                        </mat-select>
+                                                </mat-form-field>
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-md-8">
+                                                <mat-form-field>
+                                                        <input matInput [min]="minDate" [max]="maxDate"
+                                                                [matDatepicker]="picker" placeholder="Időpont"
+                                                                name="dateOfStart" [(ngModel)]="calendar.date">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                        </div>
+                                </div>
+
+                        </div>
+                </div>
+
+                <div class="card-footer">
+                        <mat-dialog-actions align="end">
+                                <button mat-button class="btn btn-info" (click)="save()">Mentés</button>
+                                <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
+                        </mat-dialog-actions>
+                </div>
+        </div>
 </div>
-<mat-dialog-actions align="end">
-        <button mat-button class="btn btn-success" (click)="save()">Mentés</button>
-        <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
-</mat-dialog-actions>

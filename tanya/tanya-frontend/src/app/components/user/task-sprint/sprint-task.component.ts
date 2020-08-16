@@ -44,7 +44,7 @@ export class SprintTaskComponent implements OnInit {
         this.buttonDisable = true;
         const dialogRef = this.dialog.open(SprintDialog, {
             width: '500px',
-            height: '350px',
+            //height: auto,
             data: this.projectId,
         });
 

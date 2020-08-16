@@ -27,6 +27,8 @@ import { TaskUpdateComponent } from './components/user/task/task-update/task-upd
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrentUserTaskComponent } from './components/user/current-user-task/current-user-task.component';
+import { SidebarComponent } from './components/page/sidebar/sidebar.component';
+import { NavbarComponent } from './components/page/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,9 @@ import { CurrentUserTaskComponent } from './components/user/current-user-task/cu
     TaskCreateComponent,
     TaskUpdateComponent,
     CalendarDialog,
-    CurrentUserTaskComponent
+    CurrentUserTaskComponent,
+    SidebarComponent,
+    NavbarComponent
   ],
   entryComponents: [
     CreateOrUpdateGroupDialog,

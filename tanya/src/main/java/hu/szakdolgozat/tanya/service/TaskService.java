@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import hu.szakdolgozat.tanya.service.dto.TaskDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskEditorDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
 import hu.szakdolgozat.tanya.service.mapper.TaskMapper;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class TaskService {
@@ -68,7 +71,20 @@ public class TaskService {
 	}
 
 	public TaskDTO update(TaskEditorDTO editorDTO) {
-		return null;
+		if(editorDTO.getId() == null) {
+			throw new TanyaException("Nincs ilyen azonosítójú feladat");
+		}
+			Task task = taskRepository.getOne(editorDTO.getId());
+			Sprint sprint = sprintService.findOne(editorDTO.getSprintId());
+			if(editorDTO.getResponsibleUserId() != null) {
+				User responsibleUser = userService.findOne(editorDTO.getResponsibleUserId());
+				if(authorityService.isMemberForTheGroup(sprint.getProject().getGroup().getId(), responsibleUser.getId())) {
+					task.setResponsibleUser(responsibleUser);
+				} else {
+					throw new TanyaException("Nincs jogosultságod ehhez a csoporthoz");
+				}
+			}
+		return  null;
 	}
 
 	public TaskDTO getTask(Long id) {
@@ -94,7 +110,7 @@ public class TaskService {
 	}
 
 	protected Task findOne(Long id) {
-		return taskRepository.getOne(id);
+		return taskRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 	public List<TaskMiniDTO> getAllOwnCreatedTask() {

@@ -12,16 +12,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "person")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "user" })
 @EqualsAndHashCode(exclude = { "user" })
 public class Person {

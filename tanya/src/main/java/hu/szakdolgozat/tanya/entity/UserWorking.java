@@ -11,17 +11,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import hu.szakdolgozat.tanya.entity.enumeration.ProjectRole;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name="user_working")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"user", "project"} )
 @EqualsAndHashCode(exclude = {"user", "project"} )
 public class UserWorking {

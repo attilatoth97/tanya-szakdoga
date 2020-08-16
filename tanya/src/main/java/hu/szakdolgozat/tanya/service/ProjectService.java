@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,7 +71,7 @@ public class ProjectService {
 
 	//TODO [me] Optional
 	protected Project findOne(Long id) {
-		return projectRepository.getOne(id);
+		return projectRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 	public ProjectEditerDTO getProjectEditer(Long id) {

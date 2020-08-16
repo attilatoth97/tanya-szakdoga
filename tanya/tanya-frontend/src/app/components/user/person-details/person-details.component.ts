@@ -46,7 +46,6 @@ export class PersonDetailsComponent implements OnInit {
 
     save() {
         this.userModel.person = this.personModel;
-        console.log('Save' + this.userModel.person.email);
         this.userService.update(this.userModel).subscribe(user => {
             if (user) {
                 this.toastr.success('Sikeres!', 'Mentés sikeres volt!!');

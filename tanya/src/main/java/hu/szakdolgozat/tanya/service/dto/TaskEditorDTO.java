@@ -5,8 +5,12 @@ import javax.validation.constraints.NotNull;
 
 import hu.szakdolgozat.tanya.entity.enumeration.IssueStatus;
 import hu.szakdolgozat.tanya.entity.enumeration.IssueType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class TaskEditorDTO {
 
@@ -25,8 +29,10 @@ public class TaskEditorDTO {
 	@NotNull
 	private IssueType issueType;
 
+	@NotNull
 	private Long sprintId;
 
+	@NotNull
 	private Long projectId;
 
 }

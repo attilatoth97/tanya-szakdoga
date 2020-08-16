@@ -3,6 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import hu.szakdolgozat.tanya.entity.User;
@@ -85,7 +86,7 @@ public class UserService {
 	}
 
 	public User findOne(Long id) {
-		return userRepository.getOne(id);
+		return userRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 }

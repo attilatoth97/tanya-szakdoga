@@ -12,17 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 @Entity
 @Table(name="development_log")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"project","user"} )
 @EqualsAndHashCode(exclude = {"project","user"} )
 public class DevelopmentLog {
