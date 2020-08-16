@@ -8,4 +8,5 @@ import hu.szakdolgozat.tanya.entity.DevelopmentLog;
 @Repository
 public interface DevelopmentLogRepository extends JpaRepository<DevelopmentLog, Long> {
 
+
 }

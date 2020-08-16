@@ -7,12 +7,11 @@ import { LoginDTO } from '../model/login.dto.modal';
 @Injectable()
 export class AuthService {
 
-
     private get baseUrl(): string {
         return backendUrl + '';
     }
 
-  constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public getToken(login: LoginDTO): Observable<string[]> {
         return this.http.post<string[]>(this.baseUrl + 'token', login);

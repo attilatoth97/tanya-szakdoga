@@ -19,17 +19,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import hu.szakdolgozat.tanya.entity.enumeration.UserRole;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "user_table")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "person", "createdProjects", "userWorkings", "responsibleForTasks", "createdTasks", "comments",
 		"calendars", "logs" })
 @EqualsAndHashCode(exclude = { "person", "createdProjects", "userWorkings", "responsibleForTasks", "createdTasks",
@@ -44,7 +44,6 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Column(name = "user_name")
 	private String userName;
 
 	private String password;
@@ -102,9 +101,6 @@ public class User {
 		this.userName = userName;
 		this.password = password;
 		this.role = role;
-	}
-
-	public User() {
 	}
 
 	public String getFullName() {

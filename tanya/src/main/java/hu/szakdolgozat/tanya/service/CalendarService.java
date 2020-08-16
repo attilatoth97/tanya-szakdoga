@@ -3,6 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +73,6 @@ public class CalendarService {
 	}
 	
 	private Calendar findOne(Long id) {
-		return calendarRepository.getOne(id);
+		return calendarRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 }

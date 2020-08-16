@@ -9,8 +9,6 @@ import hu.szakdolgozat.tanya.service.dto.GroupDTO;
 @Mapper(componentModel = "spring")
 public interface GroupMapper {
 
-	@Mapping(source = "id", target = "id")
-	@Mapping(source = "groupName", target = "groupName")
 	Group toEntity(GroupDTO dto);
 
 	@Mapping(source = "id", target = "id")

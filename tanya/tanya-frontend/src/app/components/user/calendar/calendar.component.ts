@@ -70,7 +70,6 @@ export class CalendarComponent implements OnInit {
             event = <EventObject>{
                 id: e.id, title: e.title, start: e.date, allDay: true
             };
-            console.log(event);
             this.events.push(event);
         });
     }

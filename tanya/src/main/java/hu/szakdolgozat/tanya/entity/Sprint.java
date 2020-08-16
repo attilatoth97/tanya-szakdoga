@@ -14,16 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "sprint")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "project", "tasks" })
 @EqualsAndHashCode(exclude = { "project", "tasks" })
 public class Sprint {

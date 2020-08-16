@@ -1,53 +1,63 @@
-<div class="container">
-    <h1>Projekt sprintjei:</h1>
-    <h2>
-      <button class="btn btn-primary" (click)="navigateCreateTask()" > Új feladat</button>
-    </h2>
-    <div *ngFor="let sprint of sprints">
-    <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Sprintek</h4>
+            <p class="card-category">A kiválasztott projekthez tartozó sprintek és feladatok</p>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-info" (click)="navigateCreateTask()"> Új feladat</button>
+            <div *ngFor="let sprint of sprints">
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
                     <button class="btn btn-link">
-                        {{sprint.sprintName}}
-                      </button>
-                </mat-expansion-panel-header>
-                <mat-panel-description>
+                      {{sprint.sprintName}}
+                    </button>
+                  </mat-expansion-panel-header>
+                  <mat-panel-description>
                     <table mat-table [dataSource]="sprint.tasks" class="mat-elevation-z8">
-            
-                        <ng-container matColumnDef="issueName">
-                          <th mat-header-cell *matHeaderCellDef> Feladat megnevezés </th>
-                          <td mat-cell *matCellDef="let element"> {{element.issueName}} </td>
-                        </ng-container>
-                      
-                        <ng-container matColumnDef="createUserName">
-                          <th mat-header-cell *matHeaderCellDef> Létrehozó felhasználó </th>
-                          <td mat-cell *matCellDef="let element"> {{element.createUserName}} </td>
-                        </ng-container>
-                      
-                        <ng-container matColumnDef="responsibleUserName">
-                          <th mat-header-cell *matHeaderCellDef> Feladatért felelő személy </th>
-                          <td mat-cell *matCellDef="let element"> {{element.responsibleUserName}} </td>
-                        </ng-container>
 
-                        <ng-container matColumnDef="issueStatus">
-                          <th mat-header-cell *matHeaderCellDef> Státusz </th>
-                          <td mat-cell *matCellDef="let element"> {{element.issueStatus}} </td>
-                        </ng-container>
+                      <ng-container matColumnDef="issueName">
+                        <th mat-header-cell *matHeaderCellDef> Feladat megnevezés </th>
+                        <td mat-cell *matCellDef="let element"> {{element.issueName}} </td>
+                      </ng-container>
 
-                        <ng-container matColumnDef="issueType">
-                          <th mat-header-cell *matHeaderCellDef> Tipus </th>
-                          <td mat-cell *matCellDef="let element"> {{element.issueType}} </td>
-                        </ng-container>
-                      
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      <ng-container matColumnDef="createUserName">
+                        <th mat-header-cell *matHeaderCellDef> Létrehozó felhasználó </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createUserName}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="responsibleUserName">
+                        <th mat-header-cell *matHeaderCellDef> Feladatért felelő személy </th>
+                        <td mat-cell *matCellDef="let element"> {{element.responsibleUserName}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="issueStatus">
+                        <th mat-header-cell *matHeaderCellDef> Státusz </th>
+                        <td mat-cell *matCellDef="let element"> {{element.issueStatus}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="issueType">
+                        <th mat-header-cell *matHeaderCellDef> Tipus </th>
+                        <td mat-cell *matCellDef="let element"> {{element.issueType}} </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
 
                   </mat-panel-description>
-            </mat-expansion-panel>
-    </mat-accordion>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <br>
+            <button class="btn btn-info" (click)="openSprintDialog()"> Új sprint hozzáadása</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-<br>
-  <button class="btn btn-primary" (click)="openSprintDialog()"> Új sprint hozzáadása</button>
 </div>
-

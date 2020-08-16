@@ -13,10 +13,10 @@ export class UserService {
         return backendUrl;
     }
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public getUserLoggedIn(): Observable<boolean> {
-         return this.http.get<boolean>(this.baseUrl + 'api/user-logged');
+        return this.http.get<boolean>(this.baseUrl + 'api/user-logged');
     }
 
     public create(user: UserEditerDTO): Observable<UserDTO> {
@@ -33,5 +33,5 @@ export class UserService {
 
     public getTest(): Observable<string> {
         return this.http.get<string>(this.baseUrl + 'api/test');
-   }
+    }
 }

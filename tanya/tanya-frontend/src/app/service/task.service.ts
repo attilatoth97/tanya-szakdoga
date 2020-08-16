@@ -9,12 +9,11 @@ import { TaskMiniDTO } from '../model/task.mini.dto';
 @Injectable()
 export class TaskService {
 
-
     private get baseUrl(): string {
         return backendUrl + 'api/';
     }
 
-  constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public create(task: TaskEditerDTO): Observable<TaskDTO> {
         const params = new HttpParams();
@@ -33,11 +32,11 @@ export class TaskService {
 
     public getAllOwnCreatedTask(): Observable<TaskMiniDTO[]> {
         const params = new HttpParams();
-        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/created' );
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/created');
     }
 
     public getAllOwnResponsibledTask(): Observable<TaskMiniDTO[]> {
         const params = new HttpParams();
-        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/responsibled' );
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/responsibled');
     }
 }

@@ -21,9 +21,9 @@ export class SprintTaskComponent implements OnInit {
     buttonDisable = false;
     projectId: number;
     constructor(private sprintService: SprintService,
-                private activeRoute: ActivatedRoute,
-                private route: Router,
-                private dialog: MatDialog) {}
+        private activeRoute: ActivatedRoute,
+        private route: Router,
+        private dialog: MatDialog) { }
 
     ngOnInit(): void {
         this.initSprintAndTask();
@@ -33,7 +33,7 @@ export class SprintTaskComponent implements OnInit {
         this.projectId = parseInt(this.activeRoute.snapshot.params['id'], 10);
         this.sprintService.getTheProjectsSprints(this.projectId).subscribe(sprints => {
             this.sprints = sprints;
-        }, error => {});
+        }, error => { });
     }
 
     navigate(id: number) {
@@ -44,14 +44,14 @@ export class SprintTaskComponent implements OnInit {
         this.buttonDisable = true;
         const dialogRef = this.dialog.open(SprintDialog, {
             width: '500px',
-            height: '350px',
-            data:  this.projectId,
-          });
+            //height: auto,
+            data: this.projectId,
+        });
 
-          dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(result => {
             this.buttonDisable = false;
             this.initSprintAndTask();
-          });
+        });
     }
 
     navigateCreateTask() {
@@ -64,7 +64,7 @@ export class SprintTaskComponent implements OnInit {
     selector: 'app-sprint-dialog-component',
     templateUrl: './sprint-dialog.component.html',
     providers: [SprintService]
-  })
+})
 // tslint:disable-next-line:component-class-suffix
 export class SprintDialog {
 
@@ -79,21 +79,21 @@ export class SprintDialog {
         private sprintService: SprintService,
         private toast: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: number) {
-        }
+    }
 
-        onNoClick(): void {
+    onNoClick(): void {
         this.dialogRef.close();
-        }
+    }
 
-        save() {
-            this.sprintModel.projectId = this.data;
-            this.sprintService.create(this.sprintModel).subscribe(sprint => {
-                if (sprint) {
-                    this.toast.success('Sikeres mentés');
-                    this.dialogRef.close();
-                } else {
-                    this.toast.error('Sikertelen mentés');
-                }
-            });
-        }
-  }
+    save() {
+        this.sprintModel.projectId = this.data;
+        this.sprintService.create(this.sprintModel).subscribe(sprint => {
+            if (sprint) {
+                this.toast.success('Sikeres mentés');
+                this.dialogRef.close();
+            } else {
+                this.toast.error('Sikertelen mentés');
+            }
+        });
+    }
+}

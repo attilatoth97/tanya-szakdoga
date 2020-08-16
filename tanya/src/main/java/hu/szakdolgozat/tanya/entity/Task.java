@@ -17,18 +17,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Length;
 
 import hu.szakdolgozat.tanya.entity.enumeration.IssueStatus;
 import hu.szakdolgozat.tanya.entity.enumeration.IssueType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "task")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @ToString(exclude = { "createUser", "sprint", "responsibleUser", "comments", "developmentLogs" })
 @EqualsAndHashCode(exclude = { "createUser", "sprint", "responsibleUser", "comments", "developmentLogs" })

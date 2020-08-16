@@ -12,7 +12,7 @@ export class GroupService {
         return backendUrl + 'api/';
     }
 
-  constructor( private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     public create(group: GroupDTO): Observable<GroupDTO> {
         const params = new HttpParams();
@@ -26,27 +26,27 @@ export class GroupService {
 
     public getGroup(id: number): Observable<GroupDTO> {
         const params = new HttpParams();
-        return this.http.get<GroupDTO>(this.baseUrl + 'group' + '/' + id );
+        return this.http.get<GroupDTO>(this.baseUrl + 'group' + '/' + id);
     }
 
     public delete(id: number): Observable<void> {
         const params = new HttpParams();
-        return this.http.delete<void>(this.baseUrl + 'group/' + id );
+        return this.http.delete<void>(this.baseUrl + 'group/' + id);
     }
 
     public getUserCreatedGroups(): Observable<GroupDTO[]> {
         const params = new HttpParams();
-        return this.http.get<GroupDTO[]>(this.baseUrl + 'group/created' );
+        return this.http.get<GroupDTO[]>(this.baseUrl + 'group/created');
     }
 
     public getGroupsWhereUserAttendant(): Observable<GroupDTO[]> {
         const params = new HttpParams();
-        return this.http.get<GroupDTO[]>(this.baseUrl + 'group/attendanted' );
+        return this.http.get<GroupDTO[]>(this.baseUrl + 'group/attendanted');
     }
 
     public getUserNameinGroup(id: number): Observable<string[]> {
         const params = new HttpParams();
-        return this.http.get<string[]>(this.baseUrl + 'group/users/' + id );
+        return this.http.get<string[]>(this.baseUrl + 'group/users/' + id);
     }
 
     public addUserForGroup(id: number, username: string): Observable<void> {

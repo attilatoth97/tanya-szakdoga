@@ -15,16 +15,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "group_table")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "projects", "createUser", "users" })
 @EqualsAndHashCode(exclude = { "projects", "createUser", "users" })
 public class Group {

@@ -8,16 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "user_in_group")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = { "user", "group" })
 @EqualsAndHashCode(exclude = { "user", "group" })
 public class UserInGroup {

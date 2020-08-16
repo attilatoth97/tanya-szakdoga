@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PublicHomeComponent implements OnInit {
 
-    constructor(private authGuard: AuthguardGuard, private route: Router) {}
+    constructor(private authGuard: AuthguardGuard, private route: Router) { }
 
     ngOnInit() {
         this.authGuard.refresh();

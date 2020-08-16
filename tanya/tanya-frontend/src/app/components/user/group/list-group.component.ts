@@ -19,7 +19,7 @@ export class ListGroupComponent implements OnInit {
     public init = false;
     public buttonDisable = false;
 
-    constructor(private groupService: GroupService, private dialog: MatDialog, private route: Router) {}
+    constructor(private groupService: GroupService, private dialog: MatDialog, private route: Router) { }
 
     ngOnInit(): void {
         this.initGroups().then(() => {
@@ -40,7 +40,7 @@ export class ListGroupComponent implements OnInit {
     }
 
     initGroups(): Promise<void> {
-        return new Promise((resolve  , reject) => {
+        return new Promise((resolve, reject) => {
             this.initOwnGroup();
             this.initAttendantGroup();
             resolve();
@@ -48,7 +48,6 @@ export class ListGroupComponent implements OnInit {
     }
 
     navigate(id: number) {
-        console.log('test');
         this.route.navigateByUrl('/project-list/' + id);
     }
 
@@ -57,12 +56,12 @@ export class ListGroupComponent implements OnInit {
         const dialogRef = this.dialog.open(CreateOrUpdateGroupDialog, {
             width: '500px',
             height: '200px'
-          });
+        });
 
-          dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(result => {
             this.buttonDisable = false;
             this.initOwnGroup();
-          });
+        });
     }
 }
 
@@ -80,27 +79,27 @@ export class CreateOrUpdateGroupDialog {
         public dialogRef: MatDialogRef<CreateOrUpdateGroupDialog>,
         private groupService: GroupService,
         private toast: ToastrService) {
-        }
+    }
 
-        onNoClick(): void {
+    onNoClick(): void {
         this.dialogRef.close();
-        }
+    }
 
-        save() {
-            this.groupService.create(this.groupModel).subscribe(group => {
-                if (group) {
-                    this.dialogRef.close();
-                }
-            });
-        }
-
-        valid() {
-            if (this.groupModel.groupName) {
-                this.isValid = true;
-            } else {
-                this.isValid = false;
-
+    save() {
+        this.groupService.create(this.groupModel).subscribe(group => {
+            if (group) {
+                this.dialogRef.close();
             }
+        });
+    }
+
+    valid() {
+        if (this.groupModel.groupName) {
+            this.isValid = true;
+        } else {
+            this.isValid = false;
+
         }
+    }
 }
 

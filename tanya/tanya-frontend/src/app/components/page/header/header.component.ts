@@ -13,12 +13,10 @@ import { AuthguardGuard } from 'src/app/authguard/authguard.guard';
 export class HeaderComponent implements OnInit {
 
     idToken: any;
-    constructor(private router: Router, private toast: ToastrService, public auth: AuthguardGuard) {}
+    constructor(private router: Router, private toast: ToastrService, public auth: AuthguardGuard) { }
 
     ngOnInit() {
         this.auth.refresh();
-        console.log('looged ' + this.auth.isLogged);
-
     }
 
     logout() {

@@ -7,78 +7,75 @@ import { ProjectEditerDTO } from 'src/app/model/project.editer.dto.modal';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
-    selector: 'app-project-list-component',
-    templateUrl: './project-list.component.html',
-    styleUrls: ['./project-list.component.css'],
-    providers: [ProjectService, GroupService]
+  selector: 'app-project-list-component',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.css'],
+  providers: [ProjectService, GroupService]
 
 })
 export class ProjectListComponent implements OnInit {
 
-    displayedColumns: string[] = ['projectName', 'createrUsername', 'sprintNumber', 'taskNumber', 'show'];
-    public projects: ProjectDTO[] = [];
-    public fullNames: string[] = [];
-    groupId: number;
-    public buttonDisable = false;
+  displayedColumns: string[] = ['projectName', 'createrUsername', 'sprintNumber', 'taskNumber', 'show'];
+  public projects: ProjectDTO[] = [];
+  public fullNames: string[] = [];
+  groupId: number;
+  public buttonDisable = false;
 
-    constructor(private projectService: ProjectService,
-                private groupService: GroupService,
-                private route: Router,
-                private activeRoute: ActivatedRoute,
-                private dialog: MatDialog) {}
-    ngOnInit() {
-      this.groupId = parseInt(this.activeRoute.snapshot.params['id'], 10);
-      this.initProjects();
-      this.initUserFullNameInGroup();
-    }
+  constructor(private projectService: ProjectService,
+    private groupService: GroupService,
+    private route: Router,
+    private activeRoute: ActivatedRoute,
+    private dialog: MatDialog) { }
+  ngOnInit() {
+    this.groupId = parseInt(this.activeRoute.snapshot.params['id'], 10);
+    this.initProjects();
+    this.initUserFullNameInGroup();
+  }
 
+  initProjects() {
+    this.projectService.getProjectsInGroup(this.groupId).subscribe(projects => {
+      this.projects = projects;
+    });
+  }
 
+  initUserFullNameInGroup() {
+    this.groupService.getUserNameinGroup(this.groupId).subscribe(fullnames => {
+      this.fullNames = fullnames;
+    });
+  }
 
-    initProjects() {
-      this.projectService.getProjectsInGroup(this.groupId).subscribe( projects => {
-        this.projects = projects;
-      });
-    }
-
-    initUserFullNameInGroup() {
-      this.groupService.getUserNameinGroup(this.groupId).subscribe( fullnames => {
-        this.fullNames = fullnames;
-      });
-    }
-
-    navigate(id: number) {
-      this.route.navigateByUrl('/sprint-task-list/' + id);
+  navigate(id: number) {
+    this.route.navigateByUrl('/sprint-task-list/' + id);
   }
 
   openProjectDialog() {
-      this.buttonDisable = true;
-      const dialogRef = this.dialog.open(ProjectDialog, {
-          width: '500px',
-          height: '350px',
-          data:  this.groupId,
-        });
+    this.buttonDisable = true;
+    const dialogRef = this.dialog.open(ProjectDialog, {
+      width: '500px',
+      //height: '350px',
+      data: this.groupId,
+    });
 
-        dialogRef.afterClosed().subscribe(result => {
-          this.initProjects();
-          this.buttonDisable = false;
-        });
+    dialogRef.afterClosed().subscribe(result => {
+      this.initProjects();
+      this.buttonDisable = false;
+    });
   }
 
   openUserAddDialog() {
     this.buttonDisable = true;
     const dialogRef = this.dialog.open(UserAddDialog, {
-        data: this.groupId,
-        width: '500px',
-        height: '350px'
-      });
+      data: this.groupId,
+      width: '500px',
+      //height: '350px'
+    });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.initUserFullNameInGroup();
-        this.buttonDisable = false;
-      });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      this.initUserFullNameInGroup();
+      this.buttonDisable = false;
+    });
+  }
 }
 @Component({
   selector: 'app-project-dialog-component',
@@ -91,28 +88,27 @@ export class ProjectDialog {
   projectModel: ProjectEditerDTO = <ProjectEditerDTO>{};
 
   constructor(
-      public dialogRef: MatDialogRef<ProjectDialog>,
-      private projectService: ProjectService,
-      private toast: ToastrService,
-      @Inject(MAT_DIALOG_DATA) public data: number) {
-      }
+    public dialogRef: MatDialogRef<ProjectDialog>,
+    private projectService: ProjectService,
+    private toast: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: number) {
+  }
 
-      onNoClick(): void {
-      this.dialogRef.close();
-      }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-      save() {
-          console.log('save-dialog');
-          this.projectModel.groupId = this.data;
-          this.projectService.create(this.projectModel).subscribe(project => {
-              if (project) {
-                  this.toast.success('Sikeres mentés');
-                  this.dialogRef.close();
-              } else {
-                  this.toast.error('Sikertelen mentés');
-              }
-          });
+  save() {
+    this.projectModel.groupId = this.data;
+    this.projectService.create(this.projectModel).subscribe(project => {
+      if (project) {
+        this.toast.success('Sikeres mentés');
+        this.dialogRef.close();
+      } else {
+        this.toast.error('Sikertelen mentés');
       }
+    });
+  }
 }
 
 @Component({
@@ -126,23 +122,22 @@ export class UserAddDialog {
   username: string;
 
   constructor(
-      public dialogRef: MatDialogRef<UserAddDialog>,
-      private groupService: GroupService,
-      private toast: ToastrService,
-      @Inject(MAT_DIALOG_DATA) public data: number) {
-      }
+    public dialogRef: MatDialogRef<UserAddDialog>,
+    private groupService: GroupService,
+    private toast: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: number) {
+  }
 
-      onNoClick(): void {
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.groupService.addUserForGroup(this.data.valueOf(), this.username).subscribe(() => {
+      this.toast.success('Sikeres mentés');
       this.dialogRef.close();
-      }
-
-      save() {
-          console.log(this.data);
-          this.groupService.addUserForGroup(this.data.valueOf(), this.username).subscribe( () => {
-                  this.toast.success('Sikeres mentés');
-                  this.dialogRef.close();
-              }, error => {
-                this.toast.error('Sikertelen mentés');
-              });
-      }
+    }, error => {
+      this.toast.error('Sikertelen mentés');
+    });
+  }
 }
