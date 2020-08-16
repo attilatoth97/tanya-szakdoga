@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FullCalendarModule } from '@fullcalendar/angular/';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -18,7 +19,6 @@ import { SprintTaskComponent, SprintDialog } from './components/user/task-sprint
 import { TaskViewComponent } from './components/user/task/task-view.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './authguard/auth.interceptor';
-import { NgxFullCalendarModule } from 'ngx-fullcalendar';
 import { CalendarComponent, CalendarDialog } from './components/user/calendar/calendar.component';
 import { CommentViewComponent } from './components/user/comment/comment-view.component';
 import { TaskCreateComponent } from './components/user/task/task-create/task-create.component';
@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrentUserTaskComponent } from './components/user/current-user-task/current-user-task.component';
 import { SidebarComponent } from './components/page/sidebar/sidebar.component';
 import { NavbarComponent } from './components/page/navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,7 @@ import { NavbarComponent } from './components/page/navbar/navbar.component';
     SharedModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxFullCalendarModule
+    FullCalendarModule
   ],
   providers: [{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } }, {
     provide: HTTP_INTERCEPTORS,

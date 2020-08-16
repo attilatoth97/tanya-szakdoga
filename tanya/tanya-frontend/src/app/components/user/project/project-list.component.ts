@@ -27,6 +27,7 @@ export class ProjectListComponent implements OnInit {
     private route: Router,
     private activeRoute: ActivatedRoute,
     private dialog: MatDialog) { }
+
   ngOnInit() {
     this.groupId = parseInt(this.activeRoute.snapshot.params['id'], 10);
     this.initProjects();
