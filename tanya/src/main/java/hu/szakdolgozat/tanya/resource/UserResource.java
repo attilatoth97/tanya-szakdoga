@@ -22,7 +22,7 @@ import hu.szakdolgozat.tanya.service.dto.UserEditerDTO;
 @RestController
 public class UserResource {
 
-	private final static String api = "/api";
+	private static final String api = "/api";
 
 	@Autowired
 	private UserService userService;

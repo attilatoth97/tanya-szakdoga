@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule
 
 
   ],
@@ -41,7 +43,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule
+
   ]
 })
 export class SharedModule {

@@ -1,12 +1,10 @@
 package hu.szakdolgozat.tanya.service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +25,7 @@ import hu.szakdolgozat.tanya.service.mapper.UserMapper;
 //TODO [me] Outsourcing WebService
 @Service
 @Transactional
-public class ProjectService {
+public class ProjectService extends AuthorityService {
 
 	@Autowired
 	private ProjectRepository projectRepository;
@@ -39,17 +37,11 @@ public class ProjectService {
 	private UserService userService;
 
 	@Autowired
-	private GroupService groupService;
-
-	@Autowired
 	private UserMapper userMapper;
 
 	public ProjectDTO save(ProjectEditerDTO editerDto) {
 		User loggedUser = userService.getLoggedUser();
 		Group group = groupService.findOne(editerDto.getGroupId());
-		if (group == null) {
-			throw new TanyaException("Nem létezik ilyen csoport!");
-		}
 
 		if (!isProjectNameUnique(editerDto.getGroupId(), editerDto.getProjectName())) {
 			throw new TanyaException("A projektnevének egyedinek kell lennie!");
@@ -66,28 +58,23 @@ public class ProjectService {
 	//TODO [me] Implements
 	public ProjectDTO update(ProjectEditerDTO editerDto) {
 		return null;
-
 	}
 
-	//TODO [me] Optional
 	protected Project findOne(Long id) {
-		return projectRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		Project project = projectRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		if(!isMemberForTheGroup(project.getGroup().getId(), UserUtil.getAuthenticatedUser().getId())){
+			throw new ResourceNotFoundException();
+		}
+		return project;
 	}
 
 	public ProjectEditerDTO getProjectEditer(Long id) {
 		Project project = findOne(id);
-		if (project == null) {
-			throw new TanyaException("Nem létezik ilyen projekt!");
-		}
-
 		return projectMapper.toEditerDTO(project);
 	}
 
 	public ProjectDTO getProject(Long id) {
 		Project project = findOne(id);
-		if (project == null) {
-			throw new TanyaException("Nem létezik ilyen projekt!");
-		}
 		return projectMapper.toDTO(project);
 	}
 

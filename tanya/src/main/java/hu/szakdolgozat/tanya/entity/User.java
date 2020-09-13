@@ -103,6 +103,10 @@ public class User {
 		this.role = role;
 	}
 
+	public User(Long id) {
+		this.id = id;
+	}
+
 	public String getFullName() {
 		return this.person.getLastName() + " " + this.person.getFirstName();
 	}

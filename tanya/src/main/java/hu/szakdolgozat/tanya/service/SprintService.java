@@ -17,10 +17,8 @@ import hu.szakdolgozat.tanya.service.dto.SprintEditerDTO;
 import hu.szakdolgozat.tanya.service.dto.SprintMapDTO;
 import hu.szakdolgozat.tanya.service.mapper.SprintMapper;
 
-import javax.persistence.EntityNotFoundException;
-
 @Service
-public class SprintService {
+public class SprintService extends AuthorityService {
 
 	@Autowired
 	private SprintRepository sprintRepository;
@@ -31,23 +29,16 @@ public class SprintService {
 	@Autowired
 	private ProjectService projectService;
 
-	@Autowired
-	private GroupService groupService;
-
 	public Sprint findOne(Long id) {
-		return sprintRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		Sprint sprint = sprintRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		if(!isMemberForTheGroup(sprint.getProject().getGroup(), UserUtil.getAuthenticatedUser().getId())) {
+			throw new ResourceNotFoundException();
+		}
+		return sprint;
 	}
 
 	public SprintDTO save(SprintEditerDTO dto) {
 		Project project = projectService.findOne(dto.getProjectId());
-		if (project == null) {
-			throw new TanyaException("Nem létezik ilyen projekt");
-		}
-
-		if (!groupService.isMemberTheGroup(project.getGroup(), UserUtil.getAuthenticatedUser().getId())) {
-			throw new TanyaException("Nincs jogosultságod ilyen műveletre");
-		}
-
 		Sprint sprint = sprintMapper.toEntity(dto);
 		sprint.setProject(project);
 		sprint = sprintRepository.save(sprint);

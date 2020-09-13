@@ -22,7 +22,7 @@ import hu.szakdolgozat.tanya.service.dto.UserMiniDTO;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ProjectResource {
 
 	@Autowired

@@ -18,9 +18,9 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <ngx-fullcalendar defaultView="month" [events]="events" [options]="options"
-              (onEventClick)="eventClick($event)">
-            </ngx-fullcalendar>
+            <full-calendar deepChangeDetection="true" defaultView="dayGridMonth" [plugins]="calendarPlugins"
+              [weekends]="false" [events]="calendarEvents">
+            </full-calendar>
           </div>
         </div>
       </div>

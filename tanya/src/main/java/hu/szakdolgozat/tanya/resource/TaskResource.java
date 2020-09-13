@@ -5,13 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import hu.szakdolgozat.tanya.service.TaskService;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
@@ -31,8 +25,8 @@ public class TaskResource {
 	}
 
 	@PostMapping("/task")
-	public ResponseEntity<TaskDTO> update(@Validated @RequestBody TaskEditorDTO dto) {
-		return ResponseEntity.ok().body(taskService.update(dto));
+	public ResponseEntity<TaskDTO> update(@RequestParam Long id, @Validated @RequestBody TaskEditorDTO dto) {
+		return ResponseEntity.ok().body(taskService.update(id, dto));
 	}
 
 	@GetMapping("/task/{id}")

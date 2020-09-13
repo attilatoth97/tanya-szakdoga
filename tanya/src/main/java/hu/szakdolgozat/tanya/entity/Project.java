@@ -64,7 +64,7 @@ public class Project {
 	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	private Set<Calendar> calendars = new HashSet<>();
 
-	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	/*@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	private Set<DevelopmentLog> logs = new HashSet<>();
-
+	*/
 }

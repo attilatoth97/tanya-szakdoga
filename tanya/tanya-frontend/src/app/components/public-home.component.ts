@@ -1,23 +1,34 @@
-import { OnInit, Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
-import { AuthguardGuard } from '../authguard/authguard.guard';
+import { OnInit, Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthHelperService } from '../auth-helper.service';
 
 @Component({
     selector: 'app-public-home-component',
-    templateUrl: './public-home.component.html',
-    providers: [AuthguardGuard]
+    templateUrl: './public-home.component.html'
 })
-export class PublicHomeComponent implements OnInit {
+export class PublicHomeComponent implements OnInit, OnDestroy {
 
-    constructor(private authGuard: AuthguardGuard, private route: Router) { }
+    isLogged = false;
+    private subs: Subscription;
+
+    constructor(private authHelperService: AuthHelperService, private route: Router) {
+        this.subs = this.authHelperService.obs.subscribe(e => {
+            this.isLogged = e;
+        });
+    }
 
     ngOnInit() {
-        this.authGuard.refresh();
-        if (this.authGuard.isLogged) {
+        this.authHelperService.refresh();
+        this.isLogged = this.authHelperService.isLogged;
+        if (this.isLogged) {
             this.route.navigate(['/home']);
         } else {
             this.route.navigate(['/login']);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.subs.unsubscribe();
     }
 }

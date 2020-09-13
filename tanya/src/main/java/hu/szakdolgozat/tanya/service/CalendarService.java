@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.szakdolgozat.tanya.entity.Calendar;
 import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.entity.User;
-import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.CalendarRepository;
 import hu.szakdolgozat.tanya.service.dto.CalendarDTO;
 import hu.szakdolgozat.tanya.service.dto.CalendarEditorDTO;
 import hu.szakdolgozat.tanya.service.mapper.CalendarMapper;
 
 @Service
-public class CalendarService {
+public class CalendarService extends AuthorityService {
 
 	@Autowired
 	private CalendarRepository calendarRepository;
@@ -32,21 +32,16 @@ public class CalendarService {
 	private ProjectService projectService;
 	
 	public List<CalendarDTO> findAllProjectCalendars(Long id){
-		// User loggedUser = userService.getLoggedUser();
-		// TODO project tagja e
+		Project project = projectService.findOne(id);
 		return calendarRepository.getCalendars(id).stream().map(calendarMapper::toDTO).collect(Collectors.toList());
 	}
 	
 	public CalendarDTO getCalendarDate(Long id) {
 		Calendar calendar = findOne(id);
-		if(calendar == null) {
-			throw new TanyaException("Nem található ilyen időpont!");
-		}
 		return calendarMapper.toDTO(calendar);
 	}
 	
 	public CalendarDTO save(CalendarEditorDTO dto) {
-		dto.setId(null);
 		// TODO ellenörzés
 		Project project = projectService.findOne(dto.getProjectId());
 		User loggedUser = userService.getLoggedUser();
@@ -57,13 +52,9 @@ public class CalendarService {
 		return calendarMapper.toDTO(calendar);
 	}
 	
-	public CalendarDTO update(CalendarEditorDTO dto) {
-		if(dto.getId() == null) {
-			throw new TanyaException("Nem található ilyen időpont!");
-		} 
-		// TODO ellenörzés
+	public CalendarDTO update(Long id, CalendarEditorDTO dto) {
+		Calendar calendar = findOne(id);
 		Project project = projectService.findOne(dto.getProjectId());
-		Calendar calendar = findOne(dto.getId());
 		calendar.setDate(dto.getDate());
 		calendar.setDescription(dto.getDescription());
 		calendar.setTitle(dto.getTitle());
@@ -73,6 +64,10 @@ public class CalendarService {
 	}
 	
 	private Calendar findOne(Long id) {
-		return calendarRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		Calendar calendar = calendarRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		if(!isMemberForTheGroup(calendar.getProject().getGroup().getId(), UserUtil.getAuthenticatedUser().getId())){
+			throw new ResourceNotFoundException();
+		}
+		return calendar;
 	}
 }
