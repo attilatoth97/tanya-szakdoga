@@ -29,8 +29,8 @@ public class TaskResource {
 		return ResponseEntity.ok().body(taskService.update(id, dto));
 	}
 
-	@GetMapping("/task/{id}")
-	public ResponseEntity<TaskDTO> getTask(@PathVariable("id") Long id) {
+	@GetMapping("/task")
+	public ResponseEntity<TaskDTO> getTask(@RequestParam Long id) {
 		return ResponseEntity.ok().body(taskService.getTask(id));
 	}
 

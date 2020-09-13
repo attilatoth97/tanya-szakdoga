@@ -74,8 +74,6 @@ public class TaskService extends AuthorityService {
 	public TaskDTO getTask(Long id) {
 		Task task = findOne(id);
 		TaskDTO result = taskMapper.toDTO(task);
-		result.setCreateUserName(task.getCreateUser().getFullName());
-		result.setResponsibleUserName(task.getResponsibleUser().getFullName());
 		return result;
 	}
 

@@ -17,5 +17,12 @@ public interface TaskMapper {
 	@Mapping( target = "responsibleUserName", source = "entity.responsibleUser.userName")
 	TaskMiniDTO toMiniDTO(Task entity);
 
+	@Mapping(target = "sprintName", source = "entity.sprint.sprintName")
+	@Mapping(target = "sprintId", source = "entity.sprint.id")
+	@Mapping(target = "projectName", source = "entity.sprint.project.projectName")
+	@Mapping(target = "projectId", source = "entity.sprint.project.id")
+	@Mapping(target = "createUserName", source = "entity.createUser.userName")
+	@Mapping( target = "responsibleUserName", source = "entity.responsibleUser.userName")
+	@Mapping( target = "responsibleUserId", source = "entity.responsibleUser.id")
 	TaskDTO toDTO(Task entity);
 }
