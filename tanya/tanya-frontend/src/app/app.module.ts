@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { SharedModule } from './components/shared.module';
 import { PublicHomeComponent } from './components/public-home.component';
-import { HeaderComponent } from './components/page/header/header.component';
 import { LoginComponent } from './components/guest/login/login.component';
 import { RegistrationComponent } from './components/guest/registration/registration.component';
 import { ProjectListComponent, ProjectDialog, UserAddDialog } from './components/user/project/project-list.component';
@@ -34,7 +33,6 @@ import { NavbarComponent } from './components/page/navbar/navbar.component';
   declarations: [
     AppComponent,
     PublicHomeComponent,
-    HeaderComponent,
     LoginComponent,
     RegistrationComponent,
     ProjectListComponent,

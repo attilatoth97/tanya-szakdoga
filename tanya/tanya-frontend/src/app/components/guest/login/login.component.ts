@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { LoginDTO } from 'src/app/model/login.dto.modal';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { frontendUrl } from 'src/app/app.constant';
+import { AuthHelperService } from 'src/app/auth-helper.service';
 
 @Component({
   selector: 'app-login-component',
@@ -19,7 +18,10 @@ export class LoginComponent {
   public password: string;
   public url: string;
 
-  constructor(private authService: AuthService, private route: Router, private toast: ToastrService) { }
+  constructor(
+    private authService: AuthService,
+    private authHelperService: AuthHelperService,
+    private toast: ToastrService) { }
 
   getTokenFromBackeEnd() {
     if (this.password && this.userName) {
@@ -34,9 +36,7 @@ export class LoginComponent {
     this.login.password = this.password;
     this.login.userName = this.userName;
     this.authService.getToken(this.login).subscribe((token) => {
-      window.localStorage.setItem('id_token', token[0]);
-      this.toast.success('Sikeres bejelentkezés');
-      window.location.replace(frontendUrl);
+      this.authHelperService.login(token);
     }
     );
   }

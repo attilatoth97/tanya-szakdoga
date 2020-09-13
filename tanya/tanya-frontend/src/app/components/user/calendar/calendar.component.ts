@@ -68,7 +68,6 @@ export class CalendarComponent implements OnInit {
             };
             this.calendarEvents.push(event);
         });
-        console.log(this.calendarEvents);
     }
 
     openCalendarDialogEvent() {

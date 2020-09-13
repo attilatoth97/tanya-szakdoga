@@ -32,7 +32,6 @@ export class CurrentUserTaskComponent implements OnInit {
         });
         this.taskService.getAllOwnCreatedTask().subscribe(tasks => {
             this.ownTasks = tasks;
-            console.log(this.ownTasks);
         });
 
         this.taskService.getAllOwnResponsibledTask().subscribe(tasks => {

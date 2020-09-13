@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isLogged; else guest">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+
+    </div>
+    <div class="main-panel">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
+
+<ng-template #guest>
+    <router-outlet></router-outlet>
+</ng-template>
