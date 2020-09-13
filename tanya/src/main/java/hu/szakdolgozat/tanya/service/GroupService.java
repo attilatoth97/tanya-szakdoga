@@ -101,6 +101,11 @@ public class GroupService {
 
 	// TODO ellenőrzés logged useré e
 	public void delete(Long id) {
+		Group group = findOne(id);
+		if(!isMemberTheGroup(group, UserUtil.getAuthenticatedUser().getId())) {
+			throw new ResourceNotFoundException();
+		}
+
 		groupRepository.deleteById(id);
 	}
 
@@ -127,10 +132,7 @@ public class GroupService {
 	public boolean isMemberTheGroup(Group group, Long userId) {
 		Set<Long> membersIds = group.getUsers().stream().map(UserInGroup::getUser).map(User::getId)
 				.collect(Collectors.toSet());
-		if (membersIds.contains(userId)) {
-			return true;
-		}
-		return false;
+		return membersIds.contains(userId);
 	}
 
 	public boolean isMemberTheGroup(Long groupId, Long userId) {
@@ -149,9 +151,6 @@ public class GroupService {
 	public List<String> getUserNameinGroup(Long id) {
 		List<String> result = new ArrayList<>();
 		Group group = findOne(id);
-		if (group == null) {
-			throw new TanyaException("Nem létezik ilyen csoport");
-		}
 		group.getUsers().forEach(e -> {
 			result.add(e.getUser().getFullName());
 		});

@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class TaskEditorDTO {
 
-	private Long id;
-
 	@NotBlank
 	private String issueName;
 

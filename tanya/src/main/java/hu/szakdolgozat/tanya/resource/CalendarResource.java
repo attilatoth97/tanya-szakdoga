@@ -5,13 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import hu.szakdolgozat.tanya.service.CalendarService;
 import hu.szakdolgozat.tanya.service.dto.CalendarDTO;
@@ -30,8 +24,8 @@ public class CalendarResource {
 	}
 	
 	@PostMapping("/calendar")
-	public ResponseEntity<CalendarDTO> update(@Validated @RequestBody CalendarEditorDTO dto) {
-		return ResponseEntity.ok().body(calendarService.update(dto));
+	public ResponseEntity<CalendarDTO> update(@RequestParam Long id, @Validated @RequestBody CalendarEditorDTO dto) {
+		return ResponseEntity.ok().body(calendarService.update(id, dto));
 	}
 	
 	@GetMapping("/calendar/project/{id}")

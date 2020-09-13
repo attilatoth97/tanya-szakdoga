@@ -22,8 +22,8 @@ import org.hibernate.validator.constraints.Length;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"project","user"} )
-@EqualsAndHashCode(exclude = {"project","user"} )
+@ToString(exclude = {"task","user"} )
+@EqualsAndHashCode(exclude = {"task","user"} )
 public class DevelopmentLog {
 
 	@Id
@@ -37,10 +37,6 @@ public class DevelopmentLog {
 			})
 	@GeneratedValue(generator="developmentLogSequenceGenerator")
 	private Long id;
-	
-	@JoinColumn(name = "project_id")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Project project;
 	
 	@JoinColumn(name = "user_id")
 	@ManyToOne(fetch = FetchType.LAZY)

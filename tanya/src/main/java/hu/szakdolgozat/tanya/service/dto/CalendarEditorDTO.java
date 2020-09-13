@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CalendarEditorDTO {
-
-	private Long id;
 	
 	private String title;
 	

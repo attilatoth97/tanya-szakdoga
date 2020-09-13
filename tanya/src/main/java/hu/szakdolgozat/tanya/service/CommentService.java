@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import hu.szakdolgozat.tanya.service.dto.CommentEditerDTO;
 import hu.szakdolgozat.tanya.service.mapper.CommentMapper;
 
 @Service
-public class CommentService {
+public class CommentService extends AuthorityService{
 
 	@Autowired
 	private CommentRepository commentRepository;
@@ -31,21 +32,10 @@ public class CommentService {
 	@Autowired
 	private TaskService taskService;
 
-	@Autowired
-	private GroupService groupService;
 
 	public CommentDTO save(CommentEditerDTO dto) {
 		User creater = userService.getLoggedUser();
-
 		Task task = taskService.findOne(dto.getTaskId());
-		if (task == null) {
-			throw new TanyaException("Nem létezik ilyen azonosítójú feladat");
-		}
-
-		if (!groupService.isMemberTheGroup(task.getSprint().getProject().getGroup().getId(), creater.getId())) {
-			throw new TanyaException("Nincs hozzáférésed ehhez a csoporthoz");
-		}
-
 		Comment comment = commentMapper.toEntity(dto);
 		comment.setUser(creater);
 		comment.setCreateDate(Instant.now());
@@ -60,6 +50,7 @@ public class CommentService {
 		comments.forEach(e -> {
 			CommentDTO dto = commentMapper.toDTO(e);
 			dto.setUserFullName(e.getUser().getFullName());
+			dto.setOwn(e.getUser().getId().equals(UserUtil.getAuthenticatedUser().getId()));
 			result.add(dto);
 		});
 

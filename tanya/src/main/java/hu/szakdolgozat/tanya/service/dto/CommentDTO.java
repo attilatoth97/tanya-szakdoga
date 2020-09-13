@@ -18,4 +18,6 @@ public class CommentDTO {
 	private String userFullName;
 
 	private Instant createDate;
+
+	private boolean own;
 }

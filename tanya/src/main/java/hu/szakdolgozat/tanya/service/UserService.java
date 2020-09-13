@@ -37,7 +37,7 @@ public class UserService {
 	}
 
 	public UserDTO update(UserEditerDTO dto) {
-		if (UserUtil.getAuthenticatedUser().getId() != dto.getId()) {
+		if (!UserUtil.getAuthenticatedUser().getId().equals(dto.getId())) {
 			throw new TanyaException("Nincs jogosultságod ilyen műveletre!");
 		}
 		User user = findOne(dto.getId());
@@ -65,7 +65,7 @@ public class UserService {
 	}
 
 	public boolean userLogged() {
-		return UserUtil.getAuthenticatedUser().getUsername() == null ? false : true;
+		return UserUtil.getAuthenticatedUser().getUsername() != null;
 	}
 
 	public UserEditerDTO getLoggedEditerUser() {
