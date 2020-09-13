@@ -6,3 +6,8 @@ mat-dialog-container {
     display: inline-table !important;
     padding: unset !important;
 }
+
+button.button-tag {
+    border-radius: 40%;
+    padding: 7px
+}

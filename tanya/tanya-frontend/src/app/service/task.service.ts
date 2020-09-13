@@ -16,27 +16,30 @@ export class TaskService {
     constructor(private http: HttpClient) { }
 
     public create(task: TaskEditerDTO): Observable<TaskDTO> {
-        const params = new HttpParams();
         return this.http.put<TaskDTO>(this.baseUrl + 'task', task);
     }
 
-    public update(task: TaskEditerDTO): Observable<TaskDTO> {
-        const params = new HttpParams();
-        return this.http.post<TaskDTO>(this.baseUrl + 'comment', task);
+    public update(id: number, task: TaskEditerDTO): Observable<TaskDTO> {
+        return this.http.post<TaskDTO>(this.baseUrl + 'task/', {
+            body: { task },
+            params: {
+                'id': id
+            }
+        });
     }
 
-    public getCommentInTask(id: number): Observable<TaskDTO> {
-        const params = new HttpParams();
-        return this.http.get<TaskDTO>(this.baseUrl + 'task/' + id);
+    public getTask(id: number): Observable<TaskDTO> {
+        const params = new HttpParams().set('id', id.toString());
+        return this.http.get<TaskDTO>(this.baseUrl + 'task/', {
+            params: params
+        });
     }
 
     public getAllOwnCreatedTask(): Observable<TaskMiniDTO[]> {
-        const params = new HttpParams();
         return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/created');
     }
 
     public getAllOwnResponsibledTask(): Observable<TaskMiniDTO[]> {
-        const params = new HttpParams();
         return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/responsibled');
     }
 }

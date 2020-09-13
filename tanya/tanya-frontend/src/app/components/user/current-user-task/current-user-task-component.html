@@ -57,7 +57,9 @@
                     <th mat-header-cell *matHeaderCellDef> Műveletek</th>
                     <td mat-cell *matCellDef="let element">
                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Tovább">
-                        <button class="btn btn-info" (click)="navigate(element.id)">>></button>
+                        <button class="btn btn-info" (click)="navigate(element.id)">
+                          <mat-icon>navigate_next</mat-icon>
+                        </button>
                       </span>
                     </td>
                   </ng-container>
@@ -98,7 +100,9 @@
                     <th mat-header-cell *matHeaderCellDef> Műveletek</th>
                     <td mat-cell *matCellDef="let element">
                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Tovább">
-                        <button class="btn btn-info" (click)="navigate(element.id)">>></button>
+                        <button class="btn btn-info" (click)="navigate(element.id)">
+                          <mat-icon>navigate_next</mat-icon>
+                        </button>
                       </span>
                     </td>
                   </ng-container>

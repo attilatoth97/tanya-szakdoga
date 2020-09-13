@@ -7,11 +7,15 @@ export interface TaskDTO {
     dateOfCreate: Date;
     createUserName: string;
     description: string;
+    responsibleUserId: number;
     responsibleUserName: string;
     isClose: boolean;
     issueStatus: IssueStatus;
     issueType: IssueType;
     sprintId: number;
+    sprintName: string;
+    projectId: number;
+    projectName: string;
     dateOfLastRevisal: Date;
 }
 

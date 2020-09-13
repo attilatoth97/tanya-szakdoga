@@ -1,37 +1,86 @@
-<div class="container">
-    <h2>Feladat megtekintő</h2>
-    <div class="card">
-        <div class="card-header">
-            Feladat megnevezése
-            <button class="btn btn-default">
-                <mat-icon class="card-icon">settings</mat-icon>
-            </button>
-        </div>
-        <div class="card-body">
-            <label>A feladatott létrehozta: </label>
-            Kedves Éva
-            <br>
-            <span>Létrehozás ideje: 2019.03.12 12:32:12</span>
-            <br>
-            <span>A feladatott felelőse: name1</span>
-            <br>
-            <span>Feladat jelenlegi állapota: Folyamatban</span> - <span>Feladat feladat státusza: Open</span>
-            <span>Leírás:</span>
-            <div class="card">
-                <div class="card-body">
-                    <span>Szöveg...</span>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Feladat megtekintő</h4>
+                        <p class="card-category">A feladatokhoz tartozó információk</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10">
+                                <b>Feladat megnevezése: </b>
+                                {{currentTask?.issueName}}
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info">
+                                    <mat-icon class="card-icon">settings</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <b>A feladatott létrehozta: </b>
+                                {{currentTask?.createUserName}}
+                            </div>
+                            <div class="col-md-4">
+                                <b>Létrehozás ideje: </b>
+                                {{currentTask?.dateOfCreate | date: 'yyyy-MM-d hh:mm'}}
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <b>Projekt: </b>{{currentTask?.projectName}}
+                            </div>
+                            <div class="col-md-4">
+                                <b>Sprint: </b>{{currentTask?.sprintName}}
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <b>Feladat jelenlegi állapota: </b>
+                                <button class="btn btn-info button-tag"> <b>
+                                        {{currentTask?.issueStatus}}
+                                    </b></button>
+                            </div>
+                            <div class="col-md-4">
+                                <b>Feladat feladat státusza: </b>
+                                <button class="btn btn-info button-tag"> <b>{{currentTask?.issueType}}</b></button>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <b>A feladat felelőse: </b> {{currentTask?.responsibleUserName}}
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <b>Leírás:</b>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <span>{{currentTask?.description}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Megjegyzések</h4>
+                        <p class="card-category">A feladatokhoz tartozó megjegyzések</p>
+                    </div>
+                    <div class="card-body">
+
+                        <button class="btn btn-info">Hozzászólás</button>
+                        <app-comment-view-component></app-comment-view-component>
+                    </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
-    <h2>Megjegyzések:</h2>
-    <button class="btn btn-primary">Hozzászólás</button>
-    <app-comment-view-component></app-comment-view-component>
-
-
-    <button class="btn btn-default">Vissza</button>
 
 </div>

@@ -26,6 +26,7 @@ export class TaskCreateComponent implements OnInit {
     sprints: SprintMapDTO[] = [];
     issueTypes: Array<String> = [];
     issueStatus: Array<String> = [];
+
     constructor(private taskService: TaskService, private projectService: ProjectService, private sprintService: SprintService,
         private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) { }
 

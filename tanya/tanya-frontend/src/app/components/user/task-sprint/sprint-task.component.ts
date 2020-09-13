@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class SprintTaskComponent implements OnInit {
 
-    displayedColumns: string[] = ['issueName', 'createUserName', 'responsibleUserName', 'issueStatus', 'issueType'];
+    displayedColumns: string[] = ['issueName', 'createUserName', 'responsibleUserName', 'issueStatus', 'issueType', 'show'];
     sprints: SprintDTO[];
     buttonDisable = false;
     projectId: number;
@@ -36,8 +36,12 @@ export class SprintTaskComponent implements OnInit {
         }, error => { });
     }
 
-    navigate(id: number) {
-        this.route.navigateByUrl('/sprint-task-list/' + id);
+    navigateToView(id: number) {
+        this.route.navigateByUrl('/task-view/' + id);
+    }
+
+    navigateToModify(id: number) {
+        this.route.navigateByUrl('/task-update/' + id);
     }
 
     openSprintDialog() {
@@ -56,7 +60,6 @@ export class SprintTaskComponent implements OnInit {
 
     navigateCreateTask() {
         this.route.navigateByUrl('/task-create/' + this.projectId);
-
     }
 
 }

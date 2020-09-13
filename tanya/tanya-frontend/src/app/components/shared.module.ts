@@ -27,8 +27,6 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatExpansionModule,
     MatMenuModule
-
-
   ],
   exports: [
     MatToolbarModule,
@@ -45,7 +43,6 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatExpansionModule,
     MatMenuModule
-
   ]
 })
 export class SharedModule {
