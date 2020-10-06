@@ -11,9 +11,7 @@ import { ToastrService } from 'ngx-toastr';
     templateUrl: './sprint-task.component.html',
     styleUrls: ['./sprint-task.component.css'],
     providers: [SprintService]
-
 })
-
 export class SprintTaskComponent implements OnInit {
 
     displayedColumns: string[] = ['issueName', 'createUserName', 'responsibleUserName', 'issueStatus', 'issueType', 'show'];

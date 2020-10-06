@@ -4,7 +4,7 @@ import { TaskEditerDTO } from 'src/app/model/task.editer.modal';
 import { UserMiniDTO } from 'src/app/model/user.mini.dto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/service/project.service';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { SprintService } from 'src/app/service/sprint.service';
 import { SprintMapDTO } from 'src/app/model/sprint.map.dto';
 import { ToastrService } from 'ngx-toastr';
@@ -38,10 +38,10 @@ export class TaskCreateComponent implements OnInit {
     private initModel() {
         this.projectId = parseInt(this.activeRoute.snapshot.params['id'], 10);
         this.taskModel.projectId = this.projectId;
-        forkJoin(
+        forkJoin([
             this.projectService.getMiniUserInGroup(this.projectId),
             this.sprintService.getTheProjectsSprints(this.projectId)
-        ).subscribe(([users, sprints]) => {
+        ]).subscribe(([users, sprints]) => {
             this.groupMambers = users;
             this.sprints = sprints;
         }, () => {

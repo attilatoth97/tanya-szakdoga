@@ -12,7 +12,9 @@ export const ROUTES: RouteInfo[] = [
   { path: '/person-details', title: 'Profil adatok', icon: 'person', class: '' },
   { path: '/group-list', title: 'Csoportok', icon: 'groups', class: '' },
   { path: '/calendar', title: 'Naptár', icon: 'calendar_today', class: '' },
-  { path: '/current-user-task', title: 'Feladatok', icon: 'content_paste', class: '' }
+  { path: '/current-user-task', title: 'Feladatok', icon: 'content_paste', class: '' },
+  { path: '/current-user-development-log', title: 'Fejlesztési idő', icon: 'access_time', class: '' }
+
 ];
 
 @Component({

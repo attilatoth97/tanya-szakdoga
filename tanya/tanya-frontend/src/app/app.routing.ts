@@ -15,6 +15,7 @@ import { TaskCreateComponent } from './components/user/task/task-create/task-cre
 import { CurrentUserTaskComponent } from './components/user/current-user-task/current-user-task.component';
 import { AuthHelperService } from './auth-helper.service';
 import { TaskUpdateComponent } from './components/user/task/task-update/task-update.component';
+import { DevelopmentLogPageComponent } from './components/user/development-log/current-user-development-log/development-log-page.component';
 
 const appRoutes: Routes = [
     {
@@ -43,7 +44,9 @@ const appRoutes: Routes = [
             { path: 'task-create/:id', component: TaskCreateComponent, canActivate: [AuthGuard] },
             { path: 'task-update/:id', component: TaskUpdateComponent, canActivate: [AuthGuard] },
             { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
-            { path: 'current-user-task', component: CurrentUserTaskComponent, canActivate: [AuthGuard] }
+            { path: 'current-user-task', component: CurrentUserTaskComponent, canActivate: [AuthGuard] },
+            { path: 'current-user-development-log', component: DevelopmentLogPageComponent, canActivate: [AuthGuard] }
+
         ]
     },
 ];

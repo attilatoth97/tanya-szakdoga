@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.Instant;
 
 @Data
@@ -24,7 +22,8 @@ public class DevelopmentLogCreateDTO {
     private Long taskId;
 
     @NotNull
-    @Size(min = 0 , max = 24)
+    @Min(0)
+    @Max(24)
     private Byte developedHours;
 
     @NotNull

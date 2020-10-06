@@ -52,7 +52,11 @@ public class DevelopmentLog {
 	@JoinColumn(name = "task_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Task task;
-	
+
+	@JoinColumn(name = "project_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Project project;
+
 	@Length(max = 1000)
 	private String description;
 }

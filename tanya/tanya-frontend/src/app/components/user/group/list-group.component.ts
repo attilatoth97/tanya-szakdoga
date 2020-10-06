@@ -98,7 +98,6 @@ export class CreateOrUpdateGroupDialog {
             this.isValid = true;
         } else {
             this.isValid = false;
-
         }
     }
 }

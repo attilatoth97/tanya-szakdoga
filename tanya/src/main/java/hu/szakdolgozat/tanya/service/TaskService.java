@@ -1,9 +1,11 @@
 package hu.szakdolgozat.tanya.service;
 
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.TaskRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
-import hu.szakdolgozat.tanya.service.dto.TaskEditorDTO;
+import hu.szakdolgozat.tanya.service.dto.request.TaskEditorDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
 import hu.szakdolgozat.tanya.service.mapper.TaskMapper;
 
@@ -33,6 +35,9 @@ public class TaskService extends AuthorityService {
 
 	@Autowired
 	private SprintService sprintService;
+
+	@Autowired
+	private ProjectService projectService;
 
 	public TaskDTO save(TaskEditorDTO editorDTO) {
 		User creater = userService.getLoggedUser();
@@ -68,13 +73,21 @@ public class TaskService extends AuthorityService {
 					throw new TanyaException("Nincs jogosultságod ehhez a csoporthoz");
 				}
 			}
-		return  null;
+			Task taskFromDTO = taskMapper.toEntity(editorDTO);
+			task.setIssueName(taskFromDTO.getIssueName());
+			task.setDescription(taskFromDTO.getDescription());
+			task.setResponsibleUser(taskFromDTO.getResponsibleUser());
+			task.setIssueStatus(taskFromDTO.getIssueStatus());
+			task.setIssueType(taskFromDTO.getIssueType());
+			task.setSprint(sprint);
+			task.setEstimatedTime(taskFromDTO.getEstimatedTime());
+			task.setDateOfLastRevisal(Instant.now());
+		return taskMapper.toDTO(taskRepository.save(task));
 	}
 
 	public TaskDTO getTask(Long id) {
 		Task task = findOne(id);
-		TaskDTO result = taskMapper.toDTO(task);
-		return result;
+		return taskMapper.toDTO(task);
 	}
 
 	public void setClosedIssue(Long id) {
@@ -103,4 +116,14 @@ public class TaskService extends AuthorityService {
 				.collect(Collectors.toList());
 	}
 
+	public List<TaskMiniDTO> getTasksByProjectId(Long projectId) {
+		Project project = projectService.findOne(projectId);
+		List<Task> tasks = project.getSprints().stream().map(Sprint::getTasks).flatMap(Collection::stream).collect(Collectors.toList());
+		return tasks.stream().map(taskMapper::toMiniDTO).collect(Collectors.toList());
+	}
+
+	public void delete(Long id) {
+		Task task = findOne(id);
+		taskRepository.delete(task);
+	}
 }

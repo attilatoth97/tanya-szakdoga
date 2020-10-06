@@ -1,4 +1,4 @@
-package hu.szakdolgozat.tanya.service.dto;
+package hu.szakdolgozat.tanya.service.dto.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,5 +32,7 @@ public class TaskEditorDTO {
 
 	@NotNull
 	private Long projectId;
+
+	private Integer estimatedTime;
 
 }

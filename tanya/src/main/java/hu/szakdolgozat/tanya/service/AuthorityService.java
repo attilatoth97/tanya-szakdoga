@@ -3,7 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import hu.szakdolgozat.tanya.entity.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AuthorityService {
+public abstract class   AuthorityService {
 
 	@Autowired
 	protected GroupService groupService;

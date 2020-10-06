@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,13 +18,18 @@ public class DevelopmentLogResource {
     private DevelopmentLogService developmentLogService;
 
     @PostMapping
-    public ResponseEntity<DevelopmentLogDTO> create(@RequestBody DevelopmentLogCreateDTO createDTO) {
+    public ResponseEntity<DevelopmentLogDTO> create(@Valid @RequestBody DevelopmentLogCreateDTO createDTO) {
         return ResponseEntity.ok(developmentLogService.create(createDTO));
     }
 
     @PutMapping
-    public ResponseEntity<DevelopmentLogDTO> update(@RequestParam Long id, @RequestBody DevelopmentLogCreateDTO createDTO) {
+    public ResponseEntity<DevelopmentLogDTO> update(@RequestParam Long id, @Valid @RequestBody DevelopmentLogCreateDTO createDTO) {
         return ResponseEntity.ok(developmentLogService.update(id, createDTO));
+    }
+
+    @GetMapping
+    public ResponseEntity<DevelopmentLogDTO> getDevelopmentLog(@RequestParam Long id) {
+        return ResponseEntity.ok(developmentLogService.getDevelopmentLog(id));
     }
 
     @GetMapping("/task")
@@ -36,9 +42,9 @@ public class DevelopmentLogResource {
         return ResponseEntity.ok(developmentLogService.findAllByProjectId(id));
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<List<DevelopmentLogDTO>> findAllByUserId(@RequestParam Long id) {
-        return ResponseEntity.ok(developmentLogService.findAllByUserId(id));
+    @GetMapping("/current-user")
+    public ResponseEntity<List<DevelopmentLogDTO>> findAllByCurrentUserId() {
+        return ResponseEntity.ok(developmentLogService.findAllByCurrentUserId());
     }
 
     @DeleteMapping

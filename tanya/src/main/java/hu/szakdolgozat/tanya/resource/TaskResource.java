@@ -9,38 +9,49 @@ import org.springframework.web.bind.annotation.*;
 
 import hu.szakdolgozat.tanya.service.TaskService;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
-import hu.szakdolgozat.tanya.service.dto.TaskEditorDTO;
+import hu.szakdolgozat.tanya.service.dto.request.TaskEditorDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/task")
 public class TaskResource {
 
 	@Autowired
 	private TaskService taskService;
 
-	@PutMapping("/task")
+	@PutMapping
 	public ResponseEntity<TaskDTO> create(@Validated @RequestBody TaskEditorDTO dto) {
 		return ResponseEntity.ok().body(taskService.save(dto));
 	}
 
-	@PostMapping("/task")
+	@PostMapping
 	public ResponseEntity<TaskDTO> update(@RequestParam Long id, @Validated @RequestBody TaskEditorDTO dto) {
 		return ResponseEntity.ok().body(taskService.update(id, dto));
 	}
 
-	@GetMapping("/task")
+	@GetMapping
 	public ResponseEntity<TaskDTO> getTask(@RequestParam Long id) {
 		return ResponseEntity.ok().body(taskService.getTask(id));
 	}
 
-	@GetMapping("/task/created")
+	@GetMapping("/created")
 	public ResponseEntity<List<TaskMiniDTO>> getAllOwnCreatedTask() {
 		return ResponseEntity.ok().body(taskService.getAllOwnCreatedTask());
 	}
 
-	@GetMapping("/task/responsibled")
+	@GetMapping("/responsibled")
 	public ResponseEntity<List<TaskMiniDTO>> getAllOwnResponsibledTask() {
 		return ResponseEntity.ok().body(taskService.getAllOwnResponsibledTask());
+	}
+
+	@GetMapping("/project")
+	public ResponseEntity<List<TaskMiniDTO>> getTasksByProjectId(@RequestParam Long projectId) {
+		return ResponseEntity.ok(taskService.getTasksByProjectId(projectId));
+	}
+
+	@DeleteMapping
+	public ResponseEntity<Void> delete(@RequestParam Long id) {
+		 taskService.delete(id);
+		 return ResponseEntity.noContent().build();
 	}
 }

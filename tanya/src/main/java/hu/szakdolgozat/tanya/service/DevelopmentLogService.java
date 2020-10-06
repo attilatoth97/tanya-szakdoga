@@ -1,6 +1,7 @@
 package hu.szakdolgozat.tanya.service;
 
 import hu.szakdolgozat.tanya.entity.DevelopmentLog;
+import hu.szakdolgozat.tanya.entity.Task;
 import hu.szakdolgozat.tanya.entity.User;
 import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import hu.szakdolgozat.tanya.repository.DevelopmentLogRepository;
@@ -31,8 +32,11 @@ public class DevelopmentLogService extends AuthorityService {
     public DevelopmentLogDTO create(DevelopmentLogCreateDTO developmentLogCreateDTO) {
         DevelopmentLog developmentLog = developmentLogMapper.toEntity(developmentLogCreateDTO);
         developmentLog.setUser(new User(UserUtil.getAuthenticatedUser().getId()));
-        developmentLog.setTask(taskService.findOne(developmentLogCreateDTO.getTaskId()));
-        return developmentLogMapper.toDTO(developmentLog);
+        Task task = taskService.findOne(developmentLogCreateDTO.getTaskId());
+        developmentLog.setTask(task);
+        developmentLog.setProject(task.getSprint().getProject());
+        DevelopmentLog savedEntity = developmentLogRepository.save(developmentLog);
+        return developmentLogMapper.toDTO(savedEntity);
     }
 
     public List<DevelopmentLogDTO> findAllByTaskId(Long id){
@@ -45,8 +49,8 @@ public class DevelopmentLogService extends AuthorityService {
                 .map(developmentLogMapper::toDTO).collect(Collectors.toList());
     }
 
-    public List<DevelopmentLogDTO> findAllByUserId(Long id) {
-        return developmentLogRepository.findByUserId(id).stream().map(developmentLogMapper::toDTO)
+    public List<DevelopmentLogDTO> findAllByCurrentUserId() {
+        return developmentLogRepository.findByUserId(UserUtil.getAuthenticatedUser().getId()).stream().map(developmentLogMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -70,6 +74,10 @@ public class DevelopmentLogService extends AuthorityService {
             throw new ResourceNotFoundException();
         }
         developmentLogRepository.delete(developmentLog);
+    }
+
+    public DevelopmentLogDTO getDevelopmentLog(Long id) {
+        return developmentLogMapper.toDTO(findById(id));
     }
 
     protected DevelopmentLog findById(Long id) {

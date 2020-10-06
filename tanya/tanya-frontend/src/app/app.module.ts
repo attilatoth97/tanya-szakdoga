@@ -28,6 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrentUserTaskComponent } from './components/user/current-user-task/current-user-task.component';
 import { SidebarComponent } from './components/page/sidebar/sidebar.component';
 import { NavbarComponent } from './components/page/navbar/navbar.component';
+import { DevelopmentLogTableComponent } from './components/user/development-log/development-log.table.component';
+import { DevelopmentLogDialog, DevelopmentLogPageComponent } from './components/user/development-log/current-user-development-log/development-log-page.component';
 
 @NgModule({
   declarations: [
@@ -52,14 +54,18 @@ import { NavbarComponent } from './components/page/navbar/navbar.component';
     CalendarDialog,
     CurrentUserTaskComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    DevelopmentLogPageComponent,
+    DevelopmentLogTableComponent,
+    DevelopmentLogDialog
   ],
   entryComponents: [
     CreateOrUpdateGroupDialog,
     ProjectDialog,
     UserAddDialog,
     SprintDialog,
-    CalendarDialog
+    CalendarDialog,
+    DevelopmentLogDialog
   ],
   imports: [
     BrowserModule,

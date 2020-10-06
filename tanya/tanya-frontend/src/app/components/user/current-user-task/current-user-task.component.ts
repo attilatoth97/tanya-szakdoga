@@ -39,11 +39,17 @@ export class CurrentUserTaskComponent implements OnInit {
         });
     }
 
-    createTask(): void {
-
+    navigateToView(id: number) {
+        this.route.navigateByUrl('/task-view/' + id);
     }
 
-    navigate(id: number): void {
-        this.route.navigateByUrl('/task-create/' + id);
+    navigateToModify(id: number) {
+        this.route.navigateByUrl('/task-update/' + id);
+    }
+
+    navigateToCreate(id: number): void {
+        if (id) {
+            this.route.navigateByUrl('/task-create/' + id);
+        }
     }
 }

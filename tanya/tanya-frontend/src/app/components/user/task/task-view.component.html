@@ -15,7 +15,7 @@
                                 {{currentTask?.issueName}}
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-info">
+                                <button class="btn btn-info" (click)="navigateToModify()">
                                     <mat-icon class="card-icon">settings</mat-icon>
                                 </button>
                             </div>
@@ -46,7 +46,7 @@
                                     </b></button>
                             </div>
                             <div class="col-md-4">
-                                <b>Feladat feladat státusza: </b>
+                                <b>Feladat feladat típusa: </b>
                                 <button class="btn btn-info button-tag"> <b>{{currentTask?.issueType}}</b></button>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                     <div class="card-body">
 
                         <button class="btn btn-info">Hozzászólás</button>
-                        <app-comment-view-component></app-comment-view-component>
+                        <app-comment-view-component (deleteEmitter)="delete($event)"></app-comment-view-component>
                     </div>
                 </div>
             </div>

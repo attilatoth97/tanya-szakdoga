@@ -17,5 +17,6 @@ export interface TaskDTO {
     projectId: number;
     projectName: string;
     dateOfLastRevisal: Date;
+    estimatedTime: number;
 }
 

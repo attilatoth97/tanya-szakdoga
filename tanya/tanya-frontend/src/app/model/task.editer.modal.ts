@@ -9,6 +9,6 @@ export interface TaskEditerDTO {
     issueType: IssueType;
     sprintId: number;
     projectId: number;
-    estimatedTime: number;
+    estimatedTime?: number;
 }
 

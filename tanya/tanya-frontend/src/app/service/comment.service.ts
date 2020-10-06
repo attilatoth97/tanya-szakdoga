@@ -15,18 +15,19 @@ export class CommentService {
     constructor(private http: HttpClient) { }
 
     public create(comment: CommentEditerDTO): Observable<CommentDTO> {
-        const params = new HttpParams();
         return this.http.put<CommentDTO>(this.baseUrl + 'comment', comment);
     }
 
     public update(comment: CommentEditerDTO): Observable<CommentDTO> {
-        const params = new HttpParams();
         return this.http.post<CommentDTO>(this.baseUrl + 'comment', comment);
     }
 
     public getCommentInTask(id: number): Observable<CommentDTO[]> {
-        const params = new HttpParams();
         return this.http.get<CommentDTO[]>(this.baseUrl + 'comment/user/' + id);
+    }
 
+    public delete(id: number): Observable<void> {
+        const params = new HttpParams().set('id', id.toString());
+        return this.http.delete<void>(this.baseUrl + 'comment', { params: params });
     }
 }

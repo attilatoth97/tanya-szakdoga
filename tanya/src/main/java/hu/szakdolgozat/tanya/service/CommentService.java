@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import hu.szakdolgozat.tanya.entity.Comment;
 import hu.szakdolgozat.tanya.entity.Task;
 import hu.szakdolgozat.tanya.entity.User;
-import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.CommentRepository;
 import hu.szakdolgozat.tanya.service.dto.CommentDTO;
 import hu.szakdolgozat.tanya.service.dto.CommentEditerDTO;
@@ -55,6 +55,14 @@ public class CommentService extends AuthorityService{
 		});
 
 		return result;
+	}
+
+	public void delete(Long id) {
+		Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		if(!comment.getUser().getId().equals(UserUtil.getAuthenticatedUser().getId())) {
+			throw new ResourceNotFoundException();
+		}
+		commentRepository.delete(comment);
 	}
 
 }

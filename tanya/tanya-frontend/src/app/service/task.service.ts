@@ -42,4 +42,18 @@ export class TaskService {
     public getAllOwnResponsibledTask(): Observable<TaskMiniDTO[]> {
         return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/responsibled');
     }
+
+    public getTasksByProjectId(projectId: number): Observable<TaskMiniDTO[]> {
+        const params = new HttpParams().set('projectId', projectId.toString());
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/project/', {
+            params: params
+        });
+    }
+
+    public delete(id: number): Observable<void> {
+        const params = new HttpParams().set('id', id.toString());
+        return this.http.delete<void>(this.baseUrl + 'task/', {
+            params: params
+        });
+    }
 }

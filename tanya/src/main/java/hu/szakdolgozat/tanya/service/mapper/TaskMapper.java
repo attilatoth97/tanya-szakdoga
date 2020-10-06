@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import hu.szakdolgozat.tanya.entity.Task;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
-import hu.szakdolgozat.tanya.service.dto.TaskEditorDTO;
+import hu.szakdolgozat.tanya.service.dto.request.TaskEditorDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
 import org.mapstruct.Mapping;
 
