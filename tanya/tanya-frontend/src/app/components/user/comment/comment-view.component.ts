@@ -11,11 +11,11 @@ import { CommentService } from 'src/app/service/comment.service';
 
 export class CommentViewComponent {
 
-    @Input() comment: CommentDTO = null;
-    @Output() deleteEmitter: EventEmitter<number>;
+    @Input() comment: CommentDTO;
+    @Output() deleteEmitter = new EventEmitter<number>();
 
-    delete(id: number) {
-        this.deleteEmitter.emit(id);
+    delete() {
+        this.deleteEmitter.emit(this.comment.id);
     }
 
 }

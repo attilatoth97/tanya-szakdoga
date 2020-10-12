@@ -1,6 +1,7 @@
-package hu.szakdolgozat.tanya.resource;
+package hu.szakdolgozat.tanya.web.resource;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,21 +55,21 @@ public class GroupResource {
 		return ResponseEntity.ok().body(groupService.getGroupsWhereUserAttendant());
 	}
 
-	@GetMapping("/group/{id}/user/{username}")
-	public ResponseEntity<Void> addUserForGroup(@PathVariable("id") Long groupId,
-			@PathVariable("username") String username) {
-		groupService.addNewMemberForGroup(groupId, username);
+	@GetMapping("/group/{groupId}/user/{userId}")
+	public ResponseEntity<Void> addUserForGroup(@PathVariable Long groupId,
+			@PathVariable Long userId) {
+		groupService.addNewMemberForGroup(groupId, userId);
 		return ResponseEntity.ok().build();
 	}
 
-	@DeleteMapping("/group/{gId}/user/{id}")
-	public ResponseEntity<Void> kickFromGroup(@PathVariable("gId") Long groupId, @PathVariable("id") Long userId) {
+	@DeleteMapping("/group/{groupId}/user/{userId}")
+	public ResponseEntity<Void> kickFromGroup(@PathVariable("groupId") Long groupId, @PathVariable("userId") Long userId) {
 		groupService.kickUserFromGroup(groupId, userId);
 		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping("/group/users/{id}")
-	public ResponseEntity<List<String>> getUserNameinGroup(@PathVariable("id") Long groupId) {
+	public ResponseEntity<Map<Long,String>> getUserNameinGroup(@PathVariable("id") Long groupId) {
 		return ResponseEntity.ok().body(groupService.getUserNameinGroup(groupId));
 	}
 }

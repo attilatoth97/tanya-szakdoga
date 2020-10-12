@@ -1,16 +1,17 @@
-package hu.szakdolgozat.tanya.resource;
+package hu.szakdolgozat.tanya.web.resource;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import hu.szakdolgozat.tanya.service.TaskService;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
 import hu.szakdolgozat.tanya.service.dto.request.TaskEditorDTO;
 import hu.szakdolgozat.tanya.service.dto.TaskMiniDTO;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/task")
@@ -20,12 +21,12 @@ public class TaskResource {
 	private TaskService taskService;
 
 	@PutMapping
-	public ResponseEntity<TaskDTO> create(@Validated @RequestBody TaskEditorDTO dto) {
+	public ResponseEntity<TaskDTO> create(@Valid @RequestBody TaskEditorDTO dto) {
 		return ResponseEntity.ok().body(taskService.save(dto));
 	}
 
 	@PostMapping
-	public ResponseEntity<TaskDTO> update(@RequestParam Long id, @Validated @RequestBody TaskEditorDTO dto) {
+	public ResponseEntity<TaskDTO> update(@RequestParam Long id, @Valid @RequestBody TaskEditorDTO dto) {
 		return ResponseEntity.ok().body(taskService.update(id, dto));
 	}
 

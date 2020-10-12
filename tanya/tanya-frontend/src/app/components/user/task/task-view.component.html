@@ -51,8 +51,12 @@
                             </div>
                         </div>
                         <div class="row align-items-center">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <b>A feladat felelőse: </b> {{currentTask?.responsibleUserName}}
+                            </div>
+                            <div class="col-md-4">
+                                <b>Becsült idő: </b>
+                                {{currentTask?.estimatedTime}} óra
                             </div>
                         </div>
                         <div class="row align-items-center">
@@ -74,9 +78,16 @@
                         <p class="card-category">A feladatokhoz tartozó megjegyzések</p>
                     </div>
                     <div class="card-body">
-
-                        <button class="btn btn-info">Hozzászólás</button>
-                        <app-comment-view-component (deleteEmitter)="delete($event)"></app-comment-view-component>
+                        <mat-form-field>
+                            <textarea matInput placeholder="Megjegyzés" name="comment_description" rows="6"
+                                [(ngModel)]="commentDescription ">
+                          </textarea>
+                        </mat-form-field>
+                        <button class="btn btn-info" (click)="sendComment()">Hozzászólás</button>
+                        <ng-container *ngFor="let comment of comments">
+                            <app-comment-view-component [comment]="comment" (deleteEmitter)="delete($event)">
+                            </app-comment-view-component>
+                        </ng-container>
                     </div>
                 </div>
             </div>

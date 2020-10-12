@@ -23,7 +23,7 @@ export class CommentService {
     }
 
     public getCommentInTask(id: number): Observable<CommentDTO[]> {
-        return this.http.get<CommentDTO[]>(this.baseUrl + 'comment/user/' + id);
+        return this.http.get<CommentDTO[]>(this.baseUrl + 'comment/task/' + id);
     }
 
     public delete(id: number): Observable<void> {

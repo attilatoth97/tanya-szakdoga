@@ -3,13 +3,12 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.szakdolgozat.tanya.entity.Project;
 import hu.szakdolgozat.tanya.entity.Sprint;
-import hu.szakdolgozat.tanya.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.SprintRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.SprintDTO;

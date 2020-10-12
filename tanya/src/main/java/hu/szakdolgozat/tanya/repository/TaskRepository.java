@@ -3,7 +3,6 @@ package hu.szakdolgozat.tanya.repository;
 import java.util.List;
 import java.util.Optional;
 
-import hu.szakdolgozat.tanya.entity.Sprint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -3,11 +3,11 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import hu.szakdolgozat.tanya.entity.User;
-import hu.szakdolgozat.tanya.exception.TanyaException;
+import hu.szakdolgozat.tanya.web.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.UserRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.UserDTO;
@@ -80,7 +80,7 @@ public class UserService {
 	public User getUserByUserNameAndPassword(String userName, String password) {
 		User user = userRepository.findByUserNameAndPassword(userName, password);
 		if (user == null) {
-			throw new TanyaException("Nem található ilyen felhasználónév és jelszó párosítás az adatbázisban!");
+			throw new ResourceNotFoundException();
 		}
 		return user;
 	}

@@ -20,17 +20,15 @@ export class TaskService {
     }
 
     public update(id: number, task: TaskEditerDTO): Observable<TaskDTO> {
-        return this.http.post<TaskDTO>(this.baseUrl + 'task/', {
-            body: { task },
-            params: {
-                'id': id
-            }
+        const params = new HttpParams().set('id', id.toString());
+        return this.http.post<TaskDTO>(this.baseUrl + 'task', task, {
+            params: params
         });
     }
 
     public getTask(id: number): Observable<TaskDTO> {
         const params = new HttpParams().set('id', id.toString());
-        return this.http.get<TaskDTO>(this.baseUrl + 'task/', {
+        return this.http.get<TaskDTO>(this.baseUrl + 'task', {
             params: params
         });
     }
@@ -45,14 +43,14 @@ export class TaskService {
 
     public getTasksByProjectId(projectId: number): Observable<TaskMiniDTO[]> {
         const params = new HttpParams().set('projectId', projectId.toString());
-        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/project/', {
+        return this.http.get<TaskMiniDTO[]>(this.baseUrl + 'task/project', {
             params: params
         });
     }
 
     public delete(id: number): Observable<void> {
         const params = new HttpParams().set('id', id.toString());
-        return this.http.delete<void>(this.baseUrl + 'task/', {
+        return this.http.delete<void>(this.baseUrl + 'task', {
             params: params
         });
     }

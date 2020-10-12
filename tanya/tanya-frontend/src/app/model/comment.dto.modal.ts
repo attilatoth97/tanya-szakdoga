@@ -3,4 +3,5 @@ export interface CommentDTO {
     text: string;
     userFullName: string;
     createDate: Date;
+    own: boolean;
 }

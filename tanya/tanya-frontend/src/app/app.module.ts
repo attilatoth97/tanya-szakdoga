@@ -29,7 +29,10 @@ import { CurrentUserTaskComponent } from './components/user/current-user-task/cu
 import { SidebarComponent } from './components/page/sidebar/sidebar.component';
 import { NavbarComponent } from './components/page/navbar/navbar.component';
 import { DevelopmentLogTableComponent } from './components/user/development-log/development-log.table.component';
-import { DevelopmentLogDialog, DevelopmentLogPageComponent } from './components/user/development-log/current-user-development-log/development-log-page.component';
+import {
+  DevelopmentLogDialog,
+  DevelopmentLogPageComponent
+} from './components/user/development-log/current-user-development-log/development-log-page.component';
 
 @NgModule({
   declarations: [

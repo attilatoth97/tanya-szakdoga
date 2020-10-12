@@ -1,4 +1,4 @@
-package hu.szakdolgozat.tanya.resource;
+package hu.szakdolgozat.tanya.web.resource;
 
 import hu.szakdolgozat.tanya.service.DevelopmentLogService;
 import hu.szakdolgozat.tanya.service.dto.request.DevelopmentLogCreateDTO;

@@ -1,12 +1,10 @@
 package hu.szakdolgozat.tanya.service;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,7 @@ import hu.szakdolgozat.tanya.config.JwtUserDetails;
 import hu.szakdolgozat.tanya.entity.Group;
 import hu.szakdolgozat.tanya.entity.User;
 import hu.szakdolgozat.tanya.entity.UserInGroup;
-import hu.szakdolgozat.tanya.exception.TanyaException;
+import hu.szakdolgozat.tanya.web.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.GroupRepository;
 import hu.szakdolgozat.tanya.repository.UserInGroupRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
@@ -62,7 +60,7 @@ public class GroupService {
 		group.setCreateDate(Instant.now());
 		group.setCreateUser(userService.getLoggedUser());
 		Group savedEntity = groupRepository.save(group);
-		addNewMemberForGroup(savedEntity.getId(), userDetails.getUsername());
+		addNewMemberForGroup(savedEntity.getId(), userDetails.getId());
 		return groupMapper.toDTO(savedEntity);
 
 	}
@@ -109,9 +107,9 @@ public class GroupService {
 		groupRepository.deleteById(id);
 	}
 
-	public void addNewMemberForGroup(Long groupId, String userName) {
+	public void addNewMemberForGroup(Long groupId, Long userId) {
 		Group group = findOne(groupId);
-		User user = userService.findUserByUserName(userName);
+		User user = userService.findOne(userId);
 		if(user == null) {
 			throw new TanyaException("Nem létezik ilyen felhasználó!");
 		} 
@@ -141,18 +139,23 @@ public class GroupService {
 	}
 
 	public void kickUserFromGroup(Long groupId, Long userId) {
-		if (!isMemberTheGroup(groupId, userId)) {
+		Group group = findOne(groupId);
+		if (!isMemberTheGroup(group, userId)) {
 			throw new TanyaException("Nincs hozzáférésed ehhez a csoporthoz");
 
 		}
-		userInGroupRepository.deleteUserFromGroup(groupId, userId);
+		Set<UserInGroup> filteredUsers = group.getUsers().stream()
+				.filter(e-> e.getGroup().getId().equals(groupId) && e.getUser().getId().equals(userId))
+				.collect(Collectors.toSet());
+		group.setUsers(filteredUsers);
+		groupRepository.save(group);
 	}
 
-	public List<String> getUserNameinGroup(Long id) {
-		List<String> result = new ArrayList<>();
+	public Map<Long,String> getUserNameinGroup(Long id) {
+		Map<Long,String> result = new HashMap<>();
 		Group group = findOne(id);
 		group.getUsers().forEach(e -> {
-			result.add(e.getUser().getFullName());
+			result.put(e.getUser().getId(), e.getUser().getFullName());
 		});
 		return result;
 	}

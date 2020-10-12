@@ -18,5 +18,4 @@ public interface DevelopmentLogRepository extends JpaRepository<DevelopmentLog, 
     List<DevelopmentLog> findByUserId(Long id);
 
     List<DevelopmentLog> findByTaskSprintProjectId(Long id);
-
 }

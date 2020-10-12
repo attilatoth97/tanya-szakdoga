@@ -25,7 +25,7 @@ export class TaskUpdateComponent implements OnInit {
     issueTypes: Array<String> = [];
     issueStatus: Array<String> = [];
     currentProjectName: string;
-
+    currentTaskId: number;
     constructor(private taskService: TaskService, private sprintService: SprintService,
         private projectService: ProjectService,
         private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) { }
@@ -36,10 +36,10 @@ export class TaskUpdateComponent implements OnInit {
     }
 
     initData() {
-        const currentTaskId = parseInt(this.activeRoute.snapshot.params['id'], 10);
-        this.taskService.getTask(currentTaskId).subscribe(task => {
+        this.currentTaskId = parseInt(this.activeRoute.snapshot.params['id'], 10);
+        this.taskService.getTask(this.currentTaskId).subscribe(task => {
             this.currentProjectName = task.projectName;
-            this.taskModel = task as TaskEditerDTO;
+            this.taskModel = this.buildTaskEditerDTO(task);
             this.getMetaData(task.projectId).subscribe(([sprints, members]) => {
                 this.sprints = sprints;
                 this.groupMembers = members;
@@ -77,6 +77,11 @@ export class TaskUpdateComponent implements OnInit {
         } as TaskEditerDTO;
     }
 
-    updateTask() { }
+    updateTask() {
+        this.taskService.update(this.currentTaskId, this.taskModel).subscribe(task => {
+            this.toast.success('Sikeres mentés!');
+            this.router.navigateByUrl('/task-view/' + task.id);
+        });
+    }
 
 }

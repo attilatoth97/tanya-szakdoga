@@ -7,7 +7,6 @@ import { backendUrl } from '../app.constant';
 @Injectable()
 export class GroupService {
 
-
     private get baseUrl(): string {
         return backendUrl + 'api/';
     }
@@ -44,13 +43,18 @@ export class GroupService {
         return this.http.get<GroupDTO[]>(this.baseUrl + 'group/attendanted');
     }
 
-    public getUserNameinGroup(id: number): Observable<string[]> {
+    public getUserNameinGroup(id: number): Observable<Map<number, string>> {
         const params = new HttpParams();
-        return this.http.get<string[]>(this.baseUrl + 'group/users/' + id);
+        return this.http.get<Map<number, string>>(this.baseUrl + 'group/users/' + id);
     }
 
     public addUserForGroup(id: number, username: string): Observable<void> {
         const params = new HttpParams();
         return this.http.get<void>(this.baseUrl + 'group/' + id + '/user/' + username);
+    }
+
+    public kickFromGroup(groupId: number, userId: number): Observable<void> {
+        const params = new HttpParams();
+        return this.http.delete<void>(this.baseUrl + 'group/' + groupId + '/user/' + userId);
     }
 }

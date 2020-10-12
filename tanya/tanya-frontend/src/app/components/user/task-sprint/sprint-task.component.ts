@@ -5,12 +5,13 @@ import { SprintDTO } from 'src/app/model/sprint.dto';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SprintEditorDTO } from 'src/app/model/sprint.editor.dto';
 import { ToastrService } from 'ngx-toastr';
+import { TaskService } from 'src/app/service/task.service';
 
 @Component({
     selector: 'app-sprint-task-component',
     templateUrl: './sprint-task.component.html',
     styleUrls: ['./sprint-task.component.css'],
-    providers: [SprintService]
+    providers: [SprintService, TaskService]
 })
 export class SprintTaskComponent implements OnInit {
 
@@ -19,19 +20,26 @@ export class SprintTaskComponent implements OnInit {
     buttonDisable = false;
     projectId: number;
     constructor(private sprintService: SprintService,
+        private taskService: TaskService,
         private activeRoute: ActivatedRoute,
         private route: Router,
         private dialog: MatDialog) { }
 
     ngOnInit(): void {
+        this.projectId = parseInt(this.activeRoute.snapshot.params['id'], 10);
         this.initSprintAndTask();
     }
 
     initSprintAndTask() {
-        this.projectId = parseInt(this.activeRoute.snapshot.params['id'], 10);
         this.sprintService.getTheProjectsSprints(this.projectId).subscribe(sprints => {
             this.sprints = sprints;
         }, error => { });
+    }
+
+    deleteTask(id: number) {
+        this.taskService.delete(id).subscribe(() => {
+            this.initSprintAndTask();
+        });
     }
 
     navigateToView(id: number) {

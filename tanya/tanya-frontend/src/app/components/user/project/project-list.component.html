@@ -59,8 +59,9 @@
             <button class="btn btn-info" (click)="openUserAddDialog()">
               <strong>+</strong></button>
             <p>Csoportba felvett emberek: </p>
-            <span *ngFor="let name of fullNames">
-              {{name}},
+            <span *ngFor="let member of members | keyvalue">
+              {{member.value}}
+              <mat-icon class="card-icon" (click)="removeMember(member.key)">person_remove</mat-icon> ,
             </span>
           </div>
         </div>

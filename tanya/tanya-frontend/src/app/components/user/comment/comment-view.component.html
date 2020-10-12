@@ -1,12 +1,16 @@
-<div class="card">
+<div class="card" *ngIf="comment">
     <div class="card-header">
-        <strong>Lakatos Béla</strong>
+        <strong>{{comment.userFullName}}</strong>
         -
-        <span><i>2019-02-20 12:32:12</i></span>
+        <span><i>{{comment.createDate | date: 'yyyy-MM-dd hh:mm:ss'}}</i></span>
+        <ng-container>
+
+        </ng-container>
+        <mat-icon *ngIf="comment?.own" class="card-icon" (click)=delete()>delete</mat-icon>
     </div>
 
     <div class="card-body">
-        megjegyzés
+        {{comment.text}}
     </div>
 </div>
 <br>

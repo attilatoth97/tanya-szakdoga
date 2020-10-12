@@ -1,38 +1,94 @@
-<div class="container">
-    <div>
-        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Profil adatok">
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">groups</i>
+                        </div>
+                        <p class="card-category">Összes csoportjaid száma</p>
+                        <h3 class="card-title">{{groupNumber}}</h3>
+                    </div>
+                </div>
+            </div>
 
-            <a routerLink="/person-details">
-                <mat-card id="home-card" class="start-page-card">
-                    <mat-icon class="card-icon">account_box</mat-icon>
-                </mat-card>
-            </a>
-        </span>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">group</i>
+                        </div>
+                        <p class="card-category">Összes projektjeid száma</p>
+                        <h3 class="card-title"> {{projectNumber}}</h3>
+                    </div>
+                </div>
+            </div>
 
-        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Csoportok">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment_late</i>
+                        </div>
+                        <p class="card-category">Általad létrehozot feladatok száma</p>
+                        <h3 class="card-title"> {{createdTaskNummber}}</h3>
+                    </div>
+                </div>
+            </div>
 
-            <a routerLink="/group-list">
-                <mat-card id="card-profil" class="start-page-card">
-                    <mat-icon class="card-icon">view_list</mat-icon>
-                </mat-card>
-            </a>
-        </span>
-
-        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Naptár">
-            <a routerLink="/calendar">
-                <mat-card id="card-profil" class="start-page-card">
-                    <mat-icon class="card-icon">event_note</mat-icon>
-                </mat-card>
-            </a>
-        </span>
-
-        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Feladatok">
-            <a routerLink="/current-user-task">
-                <mat-card id="card-profil" class="start-page-card">
-                    <mat-icon class="card-icon">subject</mat-icon>
-                </mat-card>
-            </a>
-        </span>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment_turned_in</i>
+                        </div>
+                        <p class="card-category">Elvégzet feladatok száma</p>
+                        <h3 class="card-title"> {{completedTaskNumber}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">access_time</i>
+                        </div>
+                        <p class="card-category">Összes fejleszési időd</p>
+                        <h3 class="card-title"> {{developmentLogSum}} óra</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <div class="ct-chart" id="completedTasksChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Elmélt hét nap fejlesztési ideje</h4>
+                        <p class="card-category">Megjelenítsük grafikonon, hogy az elmúlt hét napba melyik feladaton,
+                            mennyit időt fordítottál.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-warning">
+                        <div class="ct-chart" id="websiteViewsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Projektek alapján fejlesztési idő</h4>
+                        <p class="card-category">Megjelenítsük a grafikonon, hogy projektekként mennyi időd lett rá
+                            fordítva</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>

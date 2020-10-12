@@ -1,4 +1,4 @@
-package hu.szakdolgozat.tanya.exception;
+package hu.szakdolgozat.tanya.web.exception;
 
 public class TanyaException extends RuntimeException {
 

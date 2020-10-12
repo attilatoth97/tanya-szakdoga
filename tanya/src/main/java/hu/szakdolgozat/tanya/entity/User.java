@@ -52,7 +52,7 @@ public class User {
 	@CollectionTable(name = "user_role")
 	@Column(name = "user_role", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Set<UserRole> role = new HashSet<UserRole>();
+	private Set<UserRole> role = new HashSet<>();
 
 	@JoinColumn(name = "person_id")
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

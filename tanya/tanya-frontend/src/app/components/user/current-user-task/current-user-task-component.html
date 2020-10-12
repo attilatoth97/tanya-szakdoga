@@ -72,13 +72,19 @@
                           <mat-icon>edit</mat-icon>
                           <span>Szerkesztés</span>
                         </button>
+                        <button mat-menu-item (click)="deleteTask(element.id)">
+                          <mat-icon>delete</mat-icon>
+                          <span>Törlés</span>
+                        </button>
                       </mat-menu>
                     </td>
                   </ng-container>
-                  <!---->
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <div class="mat-elevation-z8 d-flex justify-content-center" *ngIf="!ownTasks || ownTasks.length === 0">
+                  <b>Nincs megjelenítendő adat </b>
+                </div>
               </ul>
 
               <ul class="list-group col-md-6">
@@ -123,6 +129,10 @@
                           <mat-icon>edit</mat-icon>
                           <span>Szerkesztés</span>
                         </button>
+                        <button mat-menu-item (click)="deleteTask(element.id)">
+                          <mat-icon>delete</mat-icon>
+                          <span>Törlés</span>
+                        </button>
                       </mat-menu>
                     </td>
                   </ng-container>
@@ -130,6 +140,10 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                <div class="mat-elevation-z8 d-flex justify-content-center"
+                  *ngIf="!attendantTask || attendantTask.length === 0">
+                  <b>Nincs megjelenítendő adat </b>
+                </div>
               </ul>
             </div>
 

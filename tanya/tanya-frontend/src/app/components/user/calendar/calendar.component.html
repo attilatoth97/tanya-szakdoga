@@ -10,14 +10,16 @@
           <div class="card-body">
             <button class="btn btn-info" (click)="openCalendarDialogEvent()">Időpont felvétel</button>
             <h2>Szűrő</h2>
-            <mat-form-field>
-              <mat-label>Projektek</mat-label>
-              <mat-select [(ngModel)]="selectProjectId" name="project" (selectionChange)="onChange()">
-                <mat-option *ngFor="let project of projectMap" [value]="project.id">
-                  {{project.projectName}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-label>Projekt</mat-label>
+                <mat-select [(ngModel)]="selectProjectId" name="project" (selectionChange)="onChange()">
+                  <mat-option *ngFor="let project of projectMap" [value]="project.id">
+                    {{project.projectName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <full-calendar deepChangeDetection="true" defaultView="dayGridMonth" [plugins]="calendarPlugins"
               [weekends]="false" [events]="calendarEvents">
             </full-calendar>

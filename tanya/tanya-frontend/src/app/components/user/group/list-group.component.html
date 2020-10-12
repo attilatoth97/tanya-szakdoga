@@ -14,31 +14,36 @@
                         <div class="col-md-12 row">
                             <ul class="list-group col-md-6">
                                 <h2>Saját csoportok</h2>
-                                <div *ngFor="let group of ownGroup">
-                                    <li class="list-group-item">
-                                        <strong>{{ group.groupName }}</strong>
-                                        <span class="text-right col-md-1">
-                                            <button class="btn btn-info" (click)="navigate(group.id)">
-                                                <strong>Mutasd</strong> </button>
-                                        </span>
+                                <ng-container *ngIf="ownGroup && ownGroup.length > 0; else noData">
+                                    <div *ngFor="let group of ownGroup">
+                                        <li class="list-group-item">
+                                            <strong>{{ group.groupName }}</strong>
+                                            <span class="text-right col-md-1">
+                                                <button class="btn btn-info" (click)="navigate(group.id)">
+                                                    <strong>Mutasd</strong> </button>
+                                            </span>
 
-                                    </li>
-                                </div>
+                                        </li>
+                                    </div>
+                                </ng-container>
                             </ul>
 
                             <ul class="list-group col-md-6">
                                 <h2>Megosztott csoportok</h2>
-                                <div *ngFor="let group of attendantGroup">
-                                    <li class="list-group-item">
-                                        <strong>{{ group.groupName }}</strong>
-                                        <span> - {{group.createdUserName}}</span>
+                                <ng-container *ngIf="attendantGroup && attendantGroup.length > 0; else noData">
+                                    <div *ngFor="let group of attendantGroup">
+                                        <li class="list-group-item">
+                                            <strong>{{ group.groupName }}</strong>
+                                            <span> - {{group.createdUserName}}</span>
 
-                                        <span class="text-right col-md-1">
-                                            <button class="btn btn-info" (click)="navigate(group.id)">
-                                                <strong>Mutasd</strong> </button>
-                                        </span>
-                                    </li>
-                                </div>
+                                            <span class="text-right col-md-1">
+                                                <button class="btn btn-info" (click)="navigate(group.id)">
+                                                    <strong>Mutasd</strong> </button>
+                                            </span>
+                                        </li>
+                                    </div>
+                                </ng-container>
+
                             </ul>
                         </div>
                     </div>
@@ -47,3 +52,8 @@
         </div>
     </div>
 </div>
+<ng-template #noData>
+    <li class="list-group-item">
+        Nincs adat
+    </li>
+</ng-template>

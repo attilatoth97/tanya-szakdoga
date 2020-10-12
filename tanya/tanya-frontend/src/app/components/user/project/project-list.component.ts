@@ -18,7 +18,7 @@ export class ProjectListComponent implements OnInit {
 
   displayedColumns: string[] = ['projectName', 'createrUsername', 'sprintNumber', 'taskNumber', 'show'];
   public projects: ProjectDTO[] = [];
-  public fullNames: string[] = [];
+  public members: Map<number, string>;
   groupId: number;
   public buttonDisable = false;
 
@@ -41,13 +41,19 @@ export class ProjectListComponent implements OnInit {
   }
 
   initUserFullNameInGroup() {
-    this.groupService.getUserNameinGroup(this.groupId).subscribe(fullnames => {
-      this.fullNames = fullnames;
+    this.groupService.getUserNameinGroup(this.groupId).subscribe(members => {
+      this.members = members;
     });
   }
 
   navigate(id: number) {
     this.route.navigateByUrl('/sprint-task-list/' + id);
+  }
+
+  removeMember(userId: number) {
+    this.groupService.kickFromGroup(this.groupId, userId).subscribe(() => {
+      this.initUserFullNameInGroup();
+    });
   }
 
   openProjectDialog() {

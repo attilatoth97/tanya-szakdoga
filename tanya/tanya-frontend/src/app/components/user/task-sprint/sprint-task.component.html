@@ -60,6 +60,10 @@
                               <mat-icon>edit</mat-icon>
                               <span>Szerkesztés</span>
                             </button>
+                            <button mat-menu-item (click)="deleteTask(element.id)">
+                              <mat-icon>delete</mat-icon>
+                              <span>Törlés</span>
+                            </button>
                           </mat-menu>
                         </td>
                       </ng-container>

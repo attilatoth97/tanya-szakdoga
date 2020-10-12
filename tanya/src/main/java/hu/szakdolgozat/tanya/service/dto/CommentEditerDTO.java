@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class CommentEditerDTO {
 
-	private Long id;
-
 	@NotBlank
 	@Size(max = 1000)
 	private String text;

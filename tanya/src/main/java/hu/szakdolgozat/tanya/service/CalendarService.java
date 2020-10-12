@@ -3,7 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,8 +3,9 @@ package hu.szakdolgozat.tanya.service;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,11 +59,14 @@ public class CommentService extends AuthorityService{
 	}
 
 	public void delete(Long id) {
-		Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-		if(!comment.getUser().getId().equals(UserUtil.getAuthenticatedUser().getId())) {
-			throw new ResourceNotFoundException();
+		Optional<Comment> optionalComment = commentRepository.findById(id);
+		if(optionalComment.isPresent()) {
+			if(!optionalComment.get().getUser().getId().equals(UserUtil.getAuthenticatedUser().getId())) {
+				throw new ResourceNotFoundException();
+			}
+			commentRepository.delete(optionalComment.get());
 		}
-		commentRepository.delete(comment);
+
 	}
 
 }

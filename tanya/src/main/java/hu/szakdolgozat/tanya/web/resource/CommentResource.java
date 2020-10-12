@@ -1,4 +1,4 @@
-package hu.szakdolgozat.tanya.resource;
+package hu.szakdolgozat.tanya.web.resource;
 
 import java.util.List;
 
@@ -23,17 +23,12 @@ public class CommentResource {
 		return ResponseEntity.ok().body(commentService.save(dto));
 	}
 
-	@PostMapping("/comment")
-	public ResponseEntity<CommentDTO> update(@Validated @RequestBody CommentEditerDTO dto) {
-		return ResponseEntity.ok().body(commentService.save(dto));
-	}
-
 	@GetMapping("/comment/task/{id}")
 	public ResponseEntity<List<CommentDTO>> getCommentInTask(@PathVariable("id") Long id) {
 		return ResponseEntity.ok().body(commentService.findAllCommentByTaskId(id));
 	}
 
-	@GetMapping("/comment")
+	@DeleteMapping("/comment")
 	public ResponseEntity<Void> delete(@RequestParam Long id) {
 		commentService.delete(id);
 		return ResponseEntity.noContent().build();

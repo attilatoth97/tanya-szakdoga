@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import hu.szakdolgozat.tanya.entity.Project;
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.szakdolgozat.tanya.entity.Sprint;
 import hu.szakdolgozat.tanya.entity.Task;
 import hu.szakdolgozat.tanya.entity.User;
-import hu.szakdolgozat.tanya.exception.TanyaException;
+import hu.szakdolgozat.tanya.web.exception.TanyaException;
 import hu.szakdolgozat.tanya.repository.TaskRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.TaskDTO;
@@ -76,7 +76,6 @@ public class TaskService extends AuthorityService {
 			Task taskFromDTO = taskMapper.toEntity(editorDTO);
 			task.setIssueName(taskFromDTO.getIssueName());
 			task.setDescription(taskFromDTO.getDescription());
-			task.setResponsibleUser(taskFromDTO.getResponsibleUser());
 			task.setIssueStatus(taskFromDTO.getIssueStatus());
 			task.setIssueType(taskFromDTO.getIssueType());
 			task.setSprint(sprint);
@@ -123,7 +122,11 @@ public class TaskService extends AuthorityService {
 	}
 
 	public void delete(Long id) {
-		Task task = findOne(id);
+		Task task = taskRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		if (!isMemberForTheGroup(task.getSprint().getProject().getGroup().getId(),
+				UserUtil.getAuthenticatedUser().getId())) {
+			throw new ResourceNotFoundException();
+		}
 		taskRepository.delete(task);
 	}
 }

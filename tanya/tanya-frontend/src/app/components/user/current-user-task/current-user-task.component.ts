@@ -30,12 +30,22 @@ export class CurrentUserTaskComponent implements OnInit {
         this.projectService.getProjectMiniDTOOwn().subscribe(projects => {
             this.projectMaps = projects;
         });
+        this.fetchTask();
+    }
+
+    private fetchTask() {
         this.taskService.getAllOwnCreatedTask().subscribe(tasks => {
             this.ownTasks = tasks;
         });
 
         this.taskService.getAllOwnResponsibledTask().subscribe(tasks => {
             this.attendantTask = tasks;
+        });
+    }
+
+    deleteTask(id: number) {
+        this.taskService.delete(id).subscribe(() => {
+            this.fetchTask();
         });
     }
 

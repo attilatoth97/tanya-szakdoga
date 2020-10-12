@@ -3,7 +3,7 @@ package hu.szakdolgozat.tanya.service;
 import hu.szakdolgozat.tanya.entity.DevelopmentLog;
 import hu.szakdolgozat.tanya.entity.Task;
 import hu.szakdolgozat.tanya.entity.User;
-import hu.szakdolgozat.tanya.exception.ResourceNotFoundException;
+import hu.szakdolgozat.tanya.web.exception.ResourceNotFoundException;
 import hu.szakdolgozat.tanya.repository.DevelopmentLogRepository;
 import hu.szakdolgozat.tanya.security.UserUtil;
 import hu.szakdolgozat.tanya.service.dto.request.DevelopmentLogCreateDTO;
