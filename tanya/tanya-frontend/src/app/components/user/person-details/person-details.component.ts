@@ -55,6 +55,10 @@ export class PersonDetailsComponent implements OnInit {
         });
     }
 
+    checkPassword(): boolean {
+        return this.userModel.password && this.passwordAgain && this.userModel.password === this.passwordAgain;
+    }
+
     public password() {
         if (this.userModel.password === this.passwordAgain) {
             this.isValidPassword = true;

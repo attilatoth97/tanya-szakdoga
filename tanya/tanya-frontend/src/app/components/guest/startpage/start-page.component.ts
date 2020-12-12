@@ -11,7 +11,6 @@ import { StatisticsService } from 'src/app/service/statistics.service';
 })
 export class StartPageComponent implements OnInit {
 
-
     groupNumber: number;
     projectNumber: number;
     createdTaskNummber: number;

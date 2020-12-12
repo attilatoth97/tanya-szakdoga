@@ -5,11 +5,11 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <h4 class="card-title">Adatok szerkesztése</h4>
-                        <p class="card-category">Szerkeszheted a személyes adatokat</p>
+                        <p class="card-category">Szerkesztheted a személyes adataidat</p>
                     </div>
                     <div class="card-body">
                         <div class="align-content-center">
-                            <form #f>
+                            <form #userForm="ngForm">
                                 <div class="row">
                                     <div class="col-md-8 offset-md-2">
                                         <mat-form-field>
@@ -79,8 +79,8 @@
                                     </div>
                                 </div>
                                 <div class="example-button-row">
-                                    <button mat-raised-button color="primary" (click)="saveFunction()"
-                                        [disabled]="!isValid">Mentés</button>
+                                    <button mat-button class="btn btn-info" (click)="saveFunction()"
+                                        [disabled]="userForm.invalid || !password()">Mentés</button>
                                 </div>
                                 <span class="valid-error" *ngIf="!isValidPassword">
                                     <i>Jelszavaknak egyezniük kell!</i>

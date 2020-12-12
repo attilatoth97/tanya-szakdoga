@@ -19,8 +19,8 @@ export class CalendarService {
         return this.http.put<CalendarDTO>(this.baseUrl + 'calendar', comment);
     }
 
-    public update(comment: CalendarEditerDTO): Observable<CalendarDTO> {
-        const params = new HttpParams();
+    public update(id: number, comment: CalendarEditerDTO): Observable<CalendarDTO> {
+        const params = new HttpParams().set('id', id.toString());
         return this.http.post<CalendarDTO>(this.baseUrl + 'calendar', comment);
     }
 

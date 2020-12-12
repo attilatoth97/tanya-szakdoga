@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
 import { TaskService } from 'src/app/service/task.service';
 import { TaskEditerDTO } from 'src/app/model/task.editer.modal';
 import { UserMiniDTO } from 'src/app/model/user.mini.dto';
@@ -10,6 +10,7 @@ import { SprintMapDTO } from 'src/app/model/sprint.map.dto';
 import { ToastrService } from 'ngx-toastr';
 import { IssueType } from 'src/app/model/enum/issue-type.enum';
 import { IssueStatus } from 'src/app/model/enum/issue-status.enum';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-task-create-component',
@@ -26,6 +27,8 @@ export class TaskCreateComponent implements OnInit {
     sprints: SprintMapDTO[] = [];
     issueTypes: Array<String> = [];
     issueStatus: Array<String> = [];
+
+    @ViewChild('taskForm', { static: false }) taskForm: NgModel;
 
     constructor(private taskService: TaskService, private projectService: ProjectService, private sprintService: SprintService,
         private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) { }

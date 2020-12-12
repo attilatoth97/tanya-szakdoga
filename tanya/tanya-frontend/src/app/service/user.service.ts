@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserEditerDTO } from '../model/user.editer.dto.modal';
 import { UserDTO } from '../model/user.dto.modal';
 import { Observable } from 'rxjs/internal/Observable';

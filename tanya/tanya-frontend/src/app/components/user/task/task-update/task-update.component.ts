@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { TaskService } from 'src/app/service/task.service';
 import { IssueType } from 'src/app/model/enum/issue-type.enum';
 import { IssueStatus } from 'src/app/model/enum/issue-status.enum';
 import { TaskDTO } from 'src/app/model/task.dto.modal';
+import { NgModel } from '@angular/forms';
 @Component({
     selector: 'app-task-update-component',
     templateUrl: './task-update.component.html',
@@ -26,6 +27,9 @@ export class TaskUpdateComponent implements OnInit {
     issueStatus: Array<String> = [];
     currentProjectName: string;
     currentTaskId: number;
+
+    @ViewChild('taskForm', { static: false }) taskForm: NgModel;
+
     constructor(private taskService: TaskService, private sprintService: SprintService,
         private projectService: ProjectService,
         private activeRoute: ActivatedRoute, private router: Router, private toast: ToastrService) { }

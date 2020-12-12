@@ -1,4 +1,4 @@
-import { OnInit, Component, Input, Output, EventEmitter } from '@angular/core';
+import { OnInit, Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommentDTO } from 'src/app/model/comment.dto.modal';
 import { CommentService } from 'src/app/service/comment.service';
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { SprintService } from 'src/app/service/sprint.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SprintDTO } from 'src/app/model/sprint.dto';
@@ -6,6 +6,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { SprintEditorDTO } from 'src/app/model/sprint.editor.dto';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from 'src/app/service/task.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-sprint-task-component',
@@ -76,6 +77,8 @@ export class SprintTaskComponent implements OnInit {
 })
 // tslint:disable-next-line:component-class-suffix
 export class SprintDialog {
+
+    @ViewChild('sprintForm', { static: false }) sprintForm: NgModel;
 
     sprintModel: SprintEditorDTO = <SprintEditorDTO>{};
     end = new Date();

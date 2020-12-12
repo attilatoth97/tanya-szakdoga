@@ -27,7 +27,7 @@ export class LoginComponent {
     if (this.password && this.userName) {
       this.goLoginAndSavedTheToken();
     } else {
-      this.toast.error('Felhasználó név és jelszó megadása kötelező');
+      this.toast.error('Felhasználónév és jelszó megadása kötelező');
     }
 
   }

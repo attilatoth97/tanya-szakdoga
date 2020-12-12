@@ -1,59 +1,62 @@
 <div class="card">
     <div class="card-header card-header-info">
-        <h1 mat-dialog-title>Idő rögzítés</h1>
+        <h1 mat-dialog-title>Időrögzítés</h1>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-8">
-                <mat-form-field>
-                    <input matInput placeholder="Leírás" name="development_description "
-                        [(ngModel)]="model.description">
-                </mat-form-field>
+    <form #developmentLogForm="ngForm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput placeholder="Leírás" name="development_description "
+                            [(ngModel)]="model.description" required>
+                    </mat-form-field>
 
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <mat-form-field>
-                    <mat-label>Feladat</mat-label>
-                    <mat-select [(ngModel)]="model.taskId" name="task">
-                        <mat-option *ngFor="let task of tasks" [value]="task.id">
-                            {{task.issueName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <mat-label>Feladat</mat-label>
+                        <mat-select [(ngModel)]="model.taskId" name="task" required>
+                            <mat-option *ngFor="let task of tasks" [value]="task.id">
+                                {{task.issueName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <mat-form-field>
-                    <input matInput [matDatepicker]="picker" placeholder="Időpont" name="dateOfStart"
-                        [(ngModel)]="model.day">
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Időpont" name="dateOfStart"
+                            [(ngModel)]="model.day" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Ráfordítót idő" name="tracker_time "
-                        [(ngModel)]="model.developedHours" [min]="0" [max]="24">
-                </mat-form-field>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Ráfordítót idő" name="tracker_time "
+                            [(ngModel)]="model.developedHours" [min]="0" [max]="24" required>
+                    </mat-form-field>
 
+                </div>
             </div>
+
+
         </div>
-
-
-    </div>
-    <div class="card-footer">
-        <mat-dialog-actions align="end">
-            <button mat-button class="btn btn-info" (click)="save()">Mentés</button>
-            <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
-        </mat-dialog-actions>
-    </div>
+        <div class="card-footer">
+            <mat-dialog-actions align="end">
+                <button mat-button class="btn btn-info" (click)="save()"
+                    [disabled]="developmentLogForm.invalid">Mentés</button>
+                <button mat-button mat-dialog-close class="btn btn-danger">Mégse</button>
+            </mat-dialog-actions>
+        </div>
+    </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { CalendarDTO } from 'src/app/model/calendar.dto.modal';
@@ -7,6 +7,7 @@ import { CalendarService } from 'src/app/service/calendar.serivce';
 import { ProjectMapDTO } from 'src/app/model/project.map.dto.modal';
 import { ProjectService } from 'src/app/service/project.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-calendar-component',
@@ -15,7 +16,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 })
 export class CalendarComponent implements OnInit {
-
 
     calendarPlugins = [dayGridPlugin];
 
@@ -105,6 +105,8 @@ export class CalendarDialog implements OnInit {
     maxDate = new Date(2030, 0, 1);
     projectMap: ProjectMapDTO[] = [];
 
+    @ViewChild('calendarForm', { static: false }) calendarForm: NgModel;
+
 
     constructor(
         public dialogRef: MatDialogRef<CalendarDialog>,
@@ -123,9 +125,8 @@ export class CalendarDialog implements OnInit {
     }
 
     save() {
-        this.calendar.id = this.data;
-        const callService = this.calendar.id ?
-            this.calendarService.update(this.calendar) : this.calendarService.create(this.calendar);
+        const callService = this.data ?
+            this.calendarService.update(this.data, this.calendar) : this.calendarService.create(this.calendar);
         callService.subscribe(sprint => {
             if (sprint) {
                 this.toast.success('Sikeres mentés');

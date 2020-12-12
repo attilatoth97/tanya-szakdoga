@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -93,6 +94,7 @@ export class DevelopmentLogDialog implements OnInit {
 
     model: DevelopmentLogCreateDTO = <DevelopmentLogCreateDTO>{};
     tasks: TaskMiniDTO[] = [];
+    @ViewChild('developmentLogForm', { static: false }) developmentLogForm: NgModel;
 
 
     constructor(
@@ -106,8 +108,9 @@ export class DevelopmentLogDialog implements OnInit {
     ngOnInit(): void {
         if (this.data.developmentLogId) {
             this.initDevelopmentLog();
+        } else {
+            this.initTask(this.data.projectId);
         }
-        this.initTask();
     }
 
     onNoClick(): void {
@@ -139,11 +142,12 @@ export class DevelopmentLogDialog implements OnInit {
     private initDevelopmentLog(): void {
         this.developmentLogService.getDevelopmentLog(this.data.developmentLogId).subscribe(developmentLog => {
             this.model = developmentLog as DevelopmentLogCreateDTO;
+            this.initTask(this.model.projectId);
         });
     }
 
-    private initTask(): void {
-        this.taskService.getTasksByProjectId(this.data.projectId).subscribe(tasks => {
+    private initTask(projectId: number): void {
+        this.taskService.getTasksByProjectId(projectId).subscribe(tasks => {
             this.tasks = tasks;
         });
     }

@@ -1,4 +1,4 @@
-import { OnInit, Component, Inject } from '@angular/core';
+import { OnInit, Component, Inject, ViewChild } from '@angular/core';
 import { ProjectService } from 'src/app/service/project.service';
 import { ProjectDTO } from 'src/app/model/project.dto.modal';
 import { GroupService } from 'src/app/service/group.service';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectEditerDTO } from 'src/app/model/project.editer.dto.modal';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-project-list-component',
@@ -93,6 +94,7 @@ export class ProjectListComponent implements OnInit {
 export class ProjectDialog {
 
   projectModel: ProjectEditerDTO = <ProjectEditerDTO>{};
+  @ViewChild('projectForm', { static: false }) calendarForm: NgModel;
 
   constructor(
     public dialogRef: MatDialogRef<ProjectDialog>,
@@ -127,6 +129,7 @@ export class ProjectDialog {
 export class UserAddDialog {
 
   username: string;
+  @ViewChild('addUserForm', { static: false }) addUserForm: NgModel;
 
   constructor(
     public dialogRef: MatDialogRef<UserAddDialog>,
